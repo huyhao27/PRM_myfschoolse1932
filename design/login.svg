@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844" font-family="Helvetica, Arial, sans-serif">
+  <rect id="bg" width="390" height="844" fill="#FFFFFF"/>
+
+  <!-- Language -->
+  <text id="language" x="195" y="60" text-anchor="middle" font-size="13" fill="#65676B">English (US)</text>
+
+  <!-- Logo -->
+  <circle id="logo-circle" cx="195" cy="150" r="40" fill="#1877F2"/>
+  <text id="logo-f" x="204" y="178" text-anchor="middle" font-size="84" font-weight="700" fill="#FFFFFF">f</text>
+
+  <!-- Email -->
+  <rect id="email-box" x="24" y="240" width="342" height="56" rx="8" fill="#FFFFFF" stroke="#CED0D4" stroke-width="1"/>
+  <text id="email-label" x="40" y="273" font-size="16" fill="#65676B">Mobile number or email address</text>
+
+  <!-- Password -->
+  <rect id="password-box" x="24" y="308" width="342" height="56" rx="8" fill="#FFFFFF" stroke="#CED0D4" stroke-width="1"/>
+  <text id="password-label" x="40" y="341" font-size="16" fill="#65676B">Password</text>
+  <text id="password-eye" x="342" y="342" text-anchor="middle" font-size="14" fill="#65676B">Show</text>
+
+  <!-- Log in button -->
+  <rect id="login-button" x="24" y="384" width="342" height="48" rx="24" fill="#1877F2"/>
+  <text id="login-text" x="195" y="414" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">Log in</text>
+
+  <!-- Forgot password -->
+  <text id="forgot" x="195" y="470" text-anchor="middle" font-size="15" font-weight="600" fill="#1C1E21">Forgot password?</text>
+
+  <!-- Create new account -->
+  <rect id="create-button" x="24" y="716" width="342" height="48" rx="24" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+  <text id="create-text" x="195" y="746" text-anchor="middle" font-size="16" font-weight="600" fill="#1877F2">Create new account</text>
+
+  <!-- Meta -->
+  <text id="meta" x="195" y="800" text-anchor="middle" font-size="14" font-weight="600" fill="#65676B">∞ Meta</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844" font-family="Helvetica, Arial, sans-serif">
+  <rect id="bg" width="390" height="844" fill="#FFFFFF"/>
+
+  <!-- Back arrow -->
+  <path id="back" d="M36 62 L24 74 L36 86 M24 74 H44" fill="none" stroke="#1C1E21" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Title -->
+  <text id="title" x="24" y="140" font-size="26" font-weight="700" fill="#1C1E21">Create a new account</text>
+  <text id="subtitle" x="24" y="166" font-size="14" fill="#65676B">It's quick and easy.</text>
+  <line id="title-line" x1="24" y1="186" x2="366" y2="186" stroke="#DADDE1" stroke-width="1"/>
+
+  <!-- First name / Surname -->
+  <rect id="firstname-box" x="24" y="206" width="166" height="52" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text id="firstname-label" x="38" y="238" font-size="15" fill="#65676B">First name</text>
+  <rect id="surname-box" x="200" y="206" width="166" height="52" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text id="surname-label" x="214" y="238" font-size="15" fill="#65676B">Surname</text>
+
+  <!-- Birthday -->
+  <text id="birthday-title" x="24" y="290" font-size="13" fill="#65676B">Birthday</text>
+  <rect id="birthday-box" x="24" y="300" width="342" height="52" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text id="birthday-text" x="38" y="332" font-size="15" fill="#1C1E21">01 / 01 / 2000</text>
+
+  <!-- Gender -->
+  <text id="gender-title" x="24" y="384" font-size="13" fill="#65676B">Gender</text>
+  <rect id="gender-female" x="24" y="394" width="107" height="48" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text x="77" y="424" text-anchor="middle" font-size="14" fill="#1C1E21">Female</text>
+  <rect id="gender-male" x="141" y="394" width="107" height="48" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text x="194" y="424" text-anchor="middle" font-size="14" fill="#1C1E21">Male</text>
+  <rect id="gender-custom" x="259" y="394" width="107" height="48" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text x="312" y="424" text-anchor="middle" font-size="14" fill="#1C1E21">Custom</text>
+
+  <!-- Email -->
+  <rect id="email-box" x="24" y="462" width="342" height="52" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text id="email-label" x="38" y="494" font-size="15" fill="#65676B">Mobile number or email address</text>
+
+  <!-- Password -->
+  <rect id="password-box" x="24" y="530" width="342" height="52" rx="8" fill="#FFFFFF" stroke="#CED0D4"/>
+  <text id="password-label" x="38" y="562" font-size="15" fill="#65676B">New password</text>
+  <text id="password-eye" x="342" y="562" text-anchor="middle" font-size="14" fill="#65676B">Show</text>
+
+  <!-- Terms -->
+  <text id="terms-1" x="24" y="616" font-size="12" fill="#65676B">By tapping Sign Up, you agree to our Terms, Privacy</text>
+  <text id="terms-2" x="24" y="634" font-size="12" fill="#65676B">Policy and Cookies Policy.</text>
+
+  <!-- Sign up button -->
+  <rect id="signup-button" x="24" y="660" width="342" height="48" rx="24" fill="#1877F2"/>
+  <text id="signup-text" x="195" y="690" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">Sign Up</text>
+
+  <!-- Already have an account -->
+  <text id="have-account" x="195" y="760" text-anchor="middle" font-size="15" font-weight="600" fill="#1877F2">I already have an account</text>
+</svg>
