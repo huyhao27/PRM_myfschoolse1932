@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyFSchool - Mockups</title>
+<style>
+:root{--blue:#1877F2;--text:#1C1E21;--gray:#65676B;--border:#CED0D4;--divider:#DADDE1;--bg:#F0F2F5;--green:#2E9E5B;--red:#D93025;--amber:#E59A00}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding:32px 20px 60px}
+h1{font-size:28px;text-align:center;color:var(--blue)}
+.sub{text-align:center;color:var(--gray);margin:6px 0 24px;font-size:14px}
+.flow{max-width:1180px;margin:0 auto 36px;background:#fff;border:1px solid var(--divider);border-radius:12px;padding:16px;overflow-x:auto}
+.flow h2{font-size:16px;margin-bottom:8px}
+.flow svg{display:block;margin:0 auto;min-width:900px;width:100%;height:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px 24px;max-width:1600px;margin:0 auto;justify-items:center}
+.cell{width:360px}
+.label{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-weight:600}
+.num{width:30px;height:30px;border-radius:50%;border:2px solid var(--blue);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:14px;background:#fff;flex:none}
+.label small{display:block;font-weight:400;color:var(--gray);font-size:12px}
+.phone{width:360px;height:720px;background:#fff;border:1px solid var(--border);border-radius:28px;box-shadow:0 8px 24px rgba(0,0,0,.12);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.status{height:24px;background:#fff;font-size:11px;display:flex;justify-content:space-between;padding:6px 18px 0;color:var(--text);flex:none}
+.appbar{height:52px;background:var(--blue);color:#fff;display:flex;align-items:center;padding:0 14px;gap:10px;font-weight:600;font-size:17px;flex:none}
+.appbar .back{font-size:20px;line-height:1}
+.appbar .sp{flex:1}
+.body{flex:1;overflow:hidden;padding:14px;background:#fff;position:relative}
+.body.bg{background:var(--bg)}
+.card{background:#fff;border:1px solid var(--divider);border-radius:10px;padding:12px;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px}
+.sp1{flex:1}
+.t1{font-weight:600;font-size:14px}
+.t2{font-size:12px;color:var(--gray);margin-top:2px}
+.btn{display:flex;align-items:center;justify-content:center;height:44px;border-radius:8px;background:var(--blue);color:#fff;font-weight:600;font-size:15px}
+.btn.out{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+.btn.red{background:var(--red)}.btn.green{background:var(--green)}
+.input{height:46px;border:1px solid var(--border);border-radius:8px;padding:0 12px;display:flex;align-items:center;color:var(--gray);font-size:14px;margin-bottom:10px;background:#fff}
+.chip{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
+.c-wait{background:#FFF4D6;color:#9A6700}.c-ok{background:#DDF4E6;color:#1B7A43}.c-no{background:#FDE3E1;color:#B3261E}
+.avatar{width:40px;height:40px;border-radius:50%;background:#E7F0FD;color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.fab{position:absolute;right:16px;bottom:16px;width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(24,119,242,.4)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:#fff;border:1px solid var(--divider);border-radius:12px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:600}
+.tile i{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:22px}
+.roles{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.role{padding:4px 10px;border-radius:14px;border:1px solid var(--border);font-size:11px;color:var(--gray)}
+.role.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#E7F0FD;color:var(--blue);text-align:left;padding:7px 6px;font-weight:600}
+td{padding:7px 6px;border-bottom:1px solid var(--divider)}
+td.n,th.n{text-align:center}
+.tt th,.tt td{padding:5px 2px;text-align:center;font-size:10.5px;border:1px solid var(--divider)}
+.tt td{height:56px;vertical-align:top}
+.tt .s{background:#E7F0FD;border-radius:4px;padding:3px 2px;line-height:1.25}
+.tt .s b{display:block;font-size:10.5px}
+.tt .s2{background:#DDF4E6}.tt .s3{background:#FFF4D6}.tt .s4{background:#FDE3E1}
+.tabs{display:flex;border-bottom:1px solid var(--divider);margin:-14px -14px 12px;background:#fff}
+.tabs div{flex:1;text-align:center;padding:11px 0;font-size:13px;color:var(--gray);font-weight:600}
+.tabs .on{color:var(--blue);border-bottom:3px solid var(--blue)}
+.kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--divider);font-size:13px}
+.kv span:first-child{color:var(--gray)}.kv span:last-child{font-weight:600;text-align:right}
+.gpa{background:linear-gradient(135deg,#1877F2,#4C9AFF);color:#fff;border-radius:12px;padding:14px;margin-bottom:12px}
+.gpa big{font-size:34px;font-weight:700}
+.note{font-size:11px;color:var(--gray);text-align:center;margin-top:8px}
+.links{text-align:center;color:var(--blue);font-size:13px;font-weight:600}
+</style>
+</head>
+<body>
+<h1>MyFSchool - Mockups</h1>
+<p class="sub">Màn hình ứng dụng trường học (theo phác thảo bảng trắng) - số trong vòng tròn là số trên bảng. Màn Đăng ký bị gạch bỏ nên không có mockup.</p>
+
+<section class="flow">
+<h2>Luồng điều hướng</h2>
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial,sans-serif" font-size="13"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#65676B"/></marker></defs><path d="M130 154H200" stroke="#1877F2" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M70 125V39H200" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M340 154C370 154 370 39 400 39" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M340 154C370 154 370 119 400 119" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M340 154C370 154 370 199 400 199" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M340 154C370 154 370 279 400 279" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M550 39H650" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M550 119H650" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M550 199C600 199 600 183 650 183" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M550 199C600 199 600 237 650 237" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><path d="M550 279H600C625 279 625 301 650 301" stroke="#65676B" stroke-width="1.6" fill="none" marker-end="url(#a)"/><g font-weight="600" text-anchor="middle"><g><rect x="400" y="10" width="150" height="58" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="2"/><text x="475.0" y="36.0" fill="#1C1E21">4 ListSchedule</text><text x="475.0" y="53.0" font-weight="400" fill="#65676B" font-size="11">Thời khóa biểu</text></g><g><rect x="400" y="90" width="150" height="58" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="2"/><text x="475.0" y="116.0" fill="#1C1E21">5 ListGrade</text><text x="475.0" y="133.0" font-weight="400" fill="#65676B" font-size="11">Bảng điểm</text></g><g><rect x="400" y="170" width="150" height="58" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="2"/><text x="475.0" y="196.0" fill="#1C1E21">6 ListRequest</text><text x="475.0" y="213.0" font-weight="400" fill="#65676B" font-size="11">Đơn từ</text></g><g><rect x="400" y="250" width="150" height="58" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="2"/><text x="475.0" y="276.0" fill="#1C1E21">7 ListClub</text><text x="475.0" y="293.0" font-weight="400" fill="#65676B" font-size="11">Câu lạc bộ</text></g><g><rect x="10" y="125" width="120" height="58" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="70.0" y="151.0" fill="#1C1E21">1 Login</text><text x="70.0" y="168.0" font-weight="400" fill="#65676B" font-size="11">Đăng nhập</text></g><g><rect x="200" y="10" width="140" height="58" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="2"/><text x="270.0" y="36.0" fill="#1C1E21">2 ResetPass</text><text x="270.0" y="53.0" font-weight="400" fill="#65676B" font-size="11">Quên mật khẩu</text></g><g><rect x="200" y="125" width="140" height="58" rx="10" fill="#1877F2" stroke="#1877F2" stroke-width="2"/><text x="270.0" y="151.0" fill="#fff">3 HomePage</text><text x="270.0" y="168.0" font-weight="400" fill="#fff" font-size="11">Lưới chức năng</text></g><g><rect x="650" y="10" width="160" height="58" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="730.0" y="36.0" fill="#1C1E21">8 ViewScheduleDetail</text><text x="730.0" y="53.0" font-weight="400" fill="#65676B" font-size="11">Chi tiết tiết học</text></g><g><rect x="650" y="90" width="160" height="58" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="730.0" y="116.0" fill="#1C1E21">9 ViewGradeDetail</text><text x="730.0" y="133.0" font-weight="400" fill="#65676B" font-size="11">Chi tiết điểm</text></g><g><rect x="650" y="160" width="160" height="46" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="730.0" y="180.0" fill="#1C1E21">10 AddRequest</text><text x="730.0" y="197.0" font-weight="400" fill="#65676B" font-size="11">Tạo đơn (PH)</text></g><g><rect x="650" y="214" width="160" height="46" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="730.0" y="234.0" fill="#1C1E21">11 ViewRequestDetail</text><text x="730.0" y="251.0" font-weight="400" fill="#65676B" font-size="11">Duyệt đơn (GV)</text></g><g><rect x="650" y="272" width="160" height="58" rx="10" fill="#fff" stroke="#1877F2" stroke-width="2"/><text x="730.0" y="298.0" fill="#1C1E21">12 ViewClubDetail</text><text x="730.0" y="315.0" font-weight="400" fill="#65676B" font-size="11">Chi tiết CLB</text></g></g><text x="835" y="180" font-size="11" fill="#65676B">PH</text><text x="835" y="238" font-size="11" fill="#65676B">GV</text></svg>
+<p class="note" style="text-align:left">Ghi chú: ListClub (7) nối tới ViewClubDetail (12). ListRequest (6) chuyển tới AddRequest (10) với phụ huynh hoặc ViewRequestDetail (11) với giáo viên. Mỗi màn danh sách mở màn chi tiết tương ứng.</p>
+</section>
+
+<main class="grid">
+
+<!-- 1 Login -->
+<div class="cell"><div class="label"><span class="num">1</span><div>Login<small>Đăng nhập</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="body" style="padding:28px 22px">
+<div style="text-align:center;margin:30px 0 30px"><div style="font-size:40px;font-weight:800;color:var(--blue);letter-spacing:-1px">MyFSchool</div><div class="t2">Kết nối nhà trường - phụ huynh - học sinh</div></div>
+<div class="input">Email hoặc số điện thoại</div>
+<div class="input" style="justify-content:space-between"><span>Mật khẩu</span><span>&#128065;</span></div>
+<div class="btn" style="margin-top:6px">Đăng nhập</div>
+<div class="links" style="margin:16px 0">Quên mật khẩu?</div>
+<div style="border-top:1px solid var(--divider);margin:20px 0"></div>
+<div class="t2" style="text-align:center;margin-top:150px">Tài khoản do nhà trường cấp. Liên hệ giáo vụ nếu cần hỗ trợ.</div>
+</div></div></div>
+
+<!-- 2 ResetPass -->
+<div class="cell"><div class="label"><span class="num">2</span><div>ResetPass (GUI)<small>Đặt lại mật khẩu</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Đặt lại mật khẩu</div>
+<div class="body">
+<div style="text-align:center;margin:14px 0 20px"><div style="width:72px;height:72px;border-radius:50%;background:#E7F0FD;color:var(--blue);font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">&#128274;</div>
+<div class="t1" style="font-size:17px">Quên mật khẩu?</div><div class="t2" style="margin-top:6px">Nhập email đã đăng ký, chúng tôi sẽ gửi mã xác nhận để đặt lại mật khẩu.</div></div>
+<div class="input">Email</div>
+<div class="input">Mật khẩu mới</div>
+<div class="input">Nhập lại mật khẩu mới</div>
+<div class="btn" style="margin-top:6px">Xác nhận</div>
+<div class="links" style="margin-top:16px">Quay lại đăng nhập</div>
+</div></div></div>
+
+<!-- 3 Home -->
+<div class="cell"><div class="label"><span class="num">3</span><div>HomePage<small>Trang chủ - lưới chức năng theo vai trò</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar">MyFSchool<span class="sp"></span><span>&#128276;</span></div>
+<div class="body bg">
+<div class="card row"><div class="avatar">NA</div><div><div class="t1">Xin chào, Nguyễn Văn An</div><div class="t2">Học sinh lớp 10A1 - THPT FPT</div></div></div>
+<div class="roles"><span class="role">GV</span><span class="role">Manager</span><span class="role">PH</span><span class="role on">HS</span></div>
+<div class="tiles">
+<div class="tile"><i style="background:#E7F0FD">&#128197;</i>Thời khóa biểu</div>
+<div class="tile"><i style="background:#DDF4E6">&#128202;</i>Bảng điểm</div>
+<div class="tile"><i style="background:#FFF4D6">&#128221;</i>Đơn từ</div>
+<div class="tile"><i style="background:#FDE3E1">&#127912;</i>Câu lạc bộ</div>
+</div>
+<div class="t2" style="margin-top:12px;text-align:center">Các ô hiển thị theo vai trò (GV, Manager, PH, HS).</div>
+</div></div></div>
+
+<!-- 4 ListSchedule -->
+<div class="cell"><div class="label"><span class="num">4</span><div>ListSchedule<small>Thời khóa biểu tuần</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Thời khóa biểu</div>
+<div class="body">
+<div class="row" style="justify-content:space-between;margin-bottom:8px"><span>&#8249;</span><span class="t1">Tuần 7: 14/10 - 19/10/2026</span><span>&#8250;</span></div>
+<table class="tt"><tr><th style="width:30px">Tiết</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th></tr>
+<tr><th>1</th><td><div class="s"><b>Toán</b>P.201</div></td><td><div class="s s2"><b>Văn</b>P.201</div></td><td><div class="s s3"><b>Anh</b>P.305</div></td><td><div class="s"><b>Toán</b>P.201</div></td><td><div class="s s4"><b>Lý</b>Lab 2</div></td><td><div class="s s2"><b>Văn</b>P.201</div></td></tr>
+<tr><th>2</th><td><div class="s s3"><b>Anh</b>P.305</div></td><td><div class="s"><b>Toán</b>P.201</div></td><td><div class="s s2"><b>Văn</b>P.201</div></td><td><div class="s s4"><b>Hóa</b>Lab 1</div></td><td><div class="s"><b>Toán</b>P.201</div></td><td><div class="s s3"><b>Anh</b>P.305</div></td></tr>
+<tr><th>3</th><td><div class="s s4"><b>Lý</b>Lab 2</div></td><td><div class="s s3"><b>Sinh</b>Lab 3</div></td><td><div class="s"><b>Sử</b>P.202</div></td><td><div class="s s2"><b>Văn</b>P.201</div></td><td><div class="s s4"><b>Hóa</b>Lab 1</div></td><td><div class="s"><b>GDCD</b>P.201</div></td></tr>
+<tr><th>4</th><td><div class="s"><b>Địa</b>P.202</div></td><td><div class="s s4"><b>Hóa</b>Lab 1</div></td><td><div class="s s3"><b>Anh</b>P.305</div></td><td><div class="s"><b>Tin</b>P.401</div></td><td><div class="s"><b>Sử</b>P.202</div></td><td><div class="s s2"><b>SHL</b>P.201</div></td></tr>
+<tr><th>5</th><td><div class="s"><b>Thể dục</b>Sân</div></td><td><div class="s"><b>Tin</b>P.401</div></td><td><div class="s"><b>Địa</b>P.202</div></td><td><div class="s s3"><b>Sinh</b>Lab 3</div></td><td><div class="s"><b>Thể dục</b>Sân</div></td><td></td></tr>
+</table>
+<div class="card" style="margin-top:12px"><div class="t1">Hôm nay - Thứ Tư</div><div class="t2">Tiết 1: Anh - P.305 - Cô Lan</div><div class="t2">Tiết 2: Văn - P.201 - Cô Hoa</div></div>
+<div class="note">Chạm vào ô tiết học để xem chi tiết</div>
+</div></div></div>
+
+<!-- 5 ListGrade -->
+<div class="cell"><div class="label"><span class="num">5</span><div>ListGrade<small>Bảng điểm</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Bảng điểm</div>
+<div class="body">
+<div class="gpa"><div style="font-size:12px;opacity:.9">Điểm trung bình học kỳ 1</div><big>8.42</big><div style="font-size:12px;opacity:.9">Xếp loại: Giỏi - Hạnh kiểm: Tốt</div></div>
+<table><tr><th>Môn học</th><th class="n">Giữa kỳ</th><th class="n">Cuối kỳ</th><th class="n">TB</th></tr>
+<tr><td>Toán</td><td class="n">8.5</td><td class="n">9.0</td><td class="n"><b>8.8</b></td></tr>
+<tr><td>Ngữ văn</td><td class="n">7.5</td><td class="n">8.0</td><td class="n"><b>7.8</b></td></tr>
+<tr><td>Tiếng Anh</td><td class="n">9.0</td><td class="n">9.5</td><td class="n"><b>9.3</b></td></tr>
+<tr><td>Vật lý</td><td class="n">8.0</td><td class="n">8.5</td><td class="n"><b>8.3</b></td></tr>
+<tr><td>Hóa học</td><td class="n">7.0</td><td class="n">7.5</td><td class="n"><b>7.3</b></td></tr>
+<tr><td>Sinh học</td><td class="n">8.5</td><td class="n">8.0</td><td class="n"><b>8.2</b></td></tr>
+<tr><td>Lịch sử</td><td class="n">8.0</td><td class="n">9.0</td><td class="n"><b>8.7</b></td></tr>
+<tr><td>Tin học</td><td class="n">9.5</td><td class="n">10</td><td class="n"><b>9.8</b></td></tr>
+</table>
+<div class="note">Chạm vào môn học để xem chi tiết điểm</div>
+</div></div></div>
+
+<!-- 6 ListRequest -->
+<div class="cell"><div class="label"><span class="num">6</span><div>ListRequest<small>Danh sách đơn từ</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Đơn từ</div>
+<div class="body bg">
+<div class="roles"><span class="role on">Tất cả</span><span class="role">Chờ duyệt</span><span class="role">Đã duyệt</span><span class="role">Từ chối</span></div>
+<div class="card"><div class="row"><div class="sp1"><div class="t1">Đơn xin nghỉ học</div><div class="t2">Nguyễn Văn An - 10A1</div></div><span class="chip c-wait">Chờ duyệt</span></div><div class="t2" style="margin-top:8px">Nghỉ 15/10 - 16/10/2026 (ốm)</div></div>
+<div class="card"><div class="row"><div class="sp1"><div class="t1">Đơn xin nghỉ học</div><div class="t2">Nguyễn Văn An - 10A1</div></div><span class="chip c-ok">Đã duyệt</span></div><div class="t2" style="margin-top:8px">Nghỉ 02/10/2026 (việc gia đình)</div></div>
+<div class="card"><div class="row"><div class="sp1"><div class="t1">Xin đổi chỗ ngồi</div><div class="t2">Trần Thị Mai - 10A1</div></div><span class="chip c-no">Từ chối</span></div><div class="t2" style="margin-top:8px">Gửi 25/09/2026</div></div>
+<div class="card"><div class="row"><div class="sp1"><div class="t1">Xin phép đi trễ</div><div class="t2">Lê Minh Khoa - 10A2</div></div><span class="chip c-wait">Chờ duyệt</span></div><div class="t2" style="margin-top:8px">Ngày 12/10/2026</div></div>
+<div class="fab">+</div>
+</div></div></div>
+
+<!-- 7 ListClub -->
+<div class="cell"><div class="label"><span class="num">7</span><div>ListClub<small>Câu lạc bộ (số 7 hoặc 9 trên bảng, chưa rõ)</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Câu lạc bộ</div>
+<div class="body bg">
+<div class="input" style="margin-bottom:12px">&#128269; Tìm câu lạc bộ</div>
+<div class="card row"><div class="avatar" style="background:#E7F0FD">&#9917;</div><div class="sp1"><div class="t1">CLB Bóng đá</div><div class="t2">42 thành viên</div></div><span class="chip c-ok">Đã tham gia</span></div>
+<div class="card row"><div class="avatar" style="background:#FFF4D6">&#127928;</div><div class="sp1"><div class="t1">CLB Âm nhạc</div><div class="t2">28 thành viên</div></div><span class="chip c-wait">Chờ duyệt</span></div>
+<div class="card row"><div class="avatar" style="background:#DDF4E6">&#128187;</div><div class="sp1"><div class="t1">CLB Lập trình</div><div class="t2">56 thành viên</div></div><span class="chip" style="background:#E7F0FD;color:var(--blue)">Tham gia</span></div>
+<div class="card row"><div class="avatar" style="background:#FDE3E1">&#127912;</div><div class="sp1"><div class="t1">CLB Mỹ thuật</div><div class="t2">19 thành viên</div></div><span class="chip" style="background:#E7F0FD;color:var(--blue)">Tham gia</span></div>
+<div class="card row"><div class="avatar">&#127936;</div><div class="sp1"><div class="t1">CLB Bóng rổ</div><div class="t2">35 thành viên</div></div><span class="chip" style="background:#E7F0FD;color:var(--blue)">Tham gia</span></div>
+</div></div></div>
+
+<!-- 8 ViewScheduleDetail -->
+<div class="cell"><div class="label"><span class="num">8</span><div>ViewScheduleDetail<small>Chi tiết tiết học</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Chi tiết tiết học</div>
+<div class="body">
+<div class="card" style="background:#E7F0FD;border-color:#E7F0FD"><div class="t1" style="font-size:20px;color:var(--blue)">Tiếng Anh</div><div class="t2">Thứ Tư, 14/10/2026 - Tiết 1 (07:30 - 08:15)</div></div>
+<div class="kv"><span>Lớp</span><span>10A1</span></div>
+<div class="kv"><span>Phòng học</span><span>P.305 - Tòa B</span></div>
+<div class="kv"><span>Giáo viên</span><span>Cô Nguyễn Thị Lan</span></div>
+<div class="kv"><span>Hình thức</span><span>Trực tiếp</span></div>
+<div class="kv"><span>Nội dung</span><span>Unit 4: Environment</span></div>
+<div class="kv"><span>Chuẩn bị</span><span>Sách + từ vựng Unit 4</span></div>
+<div class="card" style="margin-top:14px"><div class="t1">Ghi chú</div><div class="t2" style="margin-top:6px">Kiểm tra 15 phút đầu giờ. Mang theo vở bài tập.</div></div>
+</div></div></div>
+
+<!-- 9 ViewGradeDetail -->
+<div class="cell"><div class="label"><span class="num">9</span><div>ViewGradeDetail<small>Chi tiết điểm môn học</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Điểm môn Toán</div>
+<div class="body">
+<div class="gpa"><div style="font-size:12px;opacity:.9">Trung bình môn Toán - HK1</div><big>8.8</big><div style="font-size:12px;opacity:.9">Giáo viên: Thầy Phạm Quốc Bảo</div></div>
+<table><tr><th>Loại điểm</th><th class="n">Hệ số</th><th class="n">Điểm</th><th>Ngày</th></tr>
+<tr><td>Miệng</td><td class="n">1</td><td class="n">9.0</td><td>10/09</td></tr>
+<tr><td>15 phút</td><td class="n">1</td><td class="n">8.5</td><td>24/09</td></tr>
+<tr><td>15 phút</td><td class="n">1</td><td class="n">9.0</td><td>08/10</td></tr>
+<tr><td>1 tiết</td><td class="n">2</td><td class="n">8.5</td><td>15/10</td></tr>
+<tr><td>Giữa kỳ</td><td class="n">2</td><td class="n">8.5</td><td>28/10</td></tr>
+<tr><td>Cuối kỳ</td><td class="n">3</td><td class="n">9.0</td><td>20/12</td></tr>
+</table>
+<div class="card" style="margin-top:12px"><div class="t1">Nhận xét của giáo viên</div><div class="t2" style="margin-top:6px">Em tiếp thu tốt, cần chú ý trình bày bài giải hình học.</div></div>
+</div></div></div>
+
+<!-- 10 AddRequest -->
+<div class="cell"><div class="label"><span class="num">10</span><div>AddRequest<small>Tạo đơn từ (phụ huynh - PH)</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Tạo đơn mới</div>
+<div class="body">
+<div class="t2" style="margin-bottom:4px">Học sinh</div><div class="input" style="justify-content:space-between"><span style="color:var(--text)">Nguyễn Văn An - 10A1</span><span>&#9662;</span></div>
+<div class="t2" style="margin-bottom:4px">Loại đơn</div><div class="input" style="justify-content:space-between"><span style="color:var(--text)">Xin nghỉ học</span><span>&#9662;</span></div>
+<div class="row"><div class="sp1"><div class="t2" style="margin-bottom:4px">Từ ngày</div><div class="input">15/10/2026</div></div><div class="sp1"><div class="t2" style="margin-bottom:4px">Đến ngày</div><div class="input">16/10/2026</div></div></div>
+<div class="t2" style="margin-bottom:4px">Lý do</div>
+<div class="input" style="height:110px;align-items:flex-start;padding-top:12px">Con bị sốt, xin phép cho con nghỉ học 2 ngày...</div>
+<div class="input" style="border-style:dashed;justify-content:center">&#128206; Đính kèm giấy xác nhận (tùy chọn)</div>
+<div class="btn" style="margin-top:8px">Gửi đơn</div>
+<div class="btn out" style="margin-top:10px">Hủy</div>
+</div></div></div>
+
+<!-- 11 ViewRequestDetail -->
+<div class="cell"><div class="label"><span class="num">11</span><div>ViewRequestDetail<small>Chi tiết đơn - giáo viên (GV) duyệt / từ chối</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>Chi tiết đơn</div>
+<div class="body">
+<div class="row" style="margin-bottom:10px"><div class="sp1"><div class="t1" style="font-size:17px">Đơn xin nghỉ học</div><div class="t2">Gửi lúc 14/10/2026 - 20:15</div></div><span class="chip c-wait">Chờ duyệt</span></div>
+<div class="kv"><span>Học sinh</span><span>Nguyễn Văn An</span></div>
+<div class="kv"><span>Lớp</span><span>10A1</span></div>
+<div class="kv"><span>Người gửi</span><span>Phụ huynh - Nguyễn Văn Bình</span></div>
+<div class="kv"><span>Thời gian nghỉ</span><span>15/10 - 16/10/2026</span></div>
+<div class="card" style="margin-top:12px"><div class="t1">Lý do</div><div class="t2" style="margin-top:6px">Con bị sốt, xin phép cho con nghỉ học 2 ngày để đi khám và nghỉ ngơi.</div></div>
+<div class="card"><div class="t1">Ý kiến giáo viên</div><div class="input" style="height:70px;align-items:flex-start;padding-top:10px;margin:8px 0 0">Nhập ý kiến (tùy chọn)...</div></div>
+<div class="row" style="margin-top:12px"><div class="btn red sp1">Từ chối</div><div class="btn green sp1">Duyệt</div></div>
+</div></div></div>
+
+<!-- 12 ViewClubDetail -->
+<div class="cell"><div class="label"><span class="num">12</span><div>ViewClubDetail<small>Chi tiết câu lạc bộ</small></div></div>
+<div class="phone"><div class="status"><span>9:41</span><span>5G 100%</span></div>
+<div class="appbar"><span class="back">&#8249;</span>CLB Lập trình</div>
+<div class="body">
+<div style="height:110px;border-radius:12px;background:linear-gradient(135deg,#1877F2,#4C9AFF);color:#fff;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:12px">&#128187;</div>
+<div class="row"><div class="sp1"><div class="t1" style="font-size:18px">CLB Lập trình FPT</div><div class="t2">56 thành viên - Sinh hoạt T6, 15:30</div></div></div>
+<div class="card" style="margin-top:12px"><div class="t1">Giới thiệu</div><div class="t2" style="margin-top:6px">Nơi học sinh yêu công nghệ cùng học Python, Flutter và tham gia các cuộc thi lập trình.</div></div>
+<div class="kv"><span>Chủ nhiệm CLB</span><span>Thầy Lê Văn Hùng</span></div>
+<div class="kv"><span>Địa điểm</span><span>P.401 - Phòng máy</span></div>
+<div class="kv"><span>Chủ tịch</span><span>Trần Minh Quân (11A2)</span></div>
+<div class="row" style="margin-top:12px"><div class="avatar">QT</div><div class="avatar">LH</div><div class="avatar">MP</div><div class="avatar" style="background:var(--bg);color:var(--gray)">+53</div></div>
+<div class="btn" style="position:absolute;left:14px;right:14px;bottom:14px">Tham gia câu lạc bộ</div>
+</div></div></div>
+
+</main>
+</body>
+</html>
