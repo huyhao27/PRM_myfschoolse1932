@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import '../models/user.dart';
 import 'home_screen.dart';
 import 'validators.dart';
 
@@ -47,18 +48,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _signUp() {
     if (_formKey.currentState!.validate()) {
-      // Xóa các trang trước đó, vào thẳng trang chủ
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (_) => HomeScreen(email: _emailController.text.trim()),
+          builder: (_) => HomeScreen(user: User(id: 0, name: _emailController.text.trim(), email: _emailController.text.trim(), phone: "", role: "HS")),
         ),
         (route) => false,
       );
     }
   }
 
-  // Kiểu ô nhập: bo góc 8, viền xám
+  // Shared style for the text fields.
   InputDecoration _inputStyle(String label, {Widget? suffix}) {
     return InputDecoration(
       labelText: label,
@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return null;
   }
 
-  // Một ô chọn giới tính
+  // One selectable gender option.
   Widget _genderBox(String text) {
     final selected = _gender == text;
     return Expanded(
@@ -148,7 +148,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const Divider(color: AppColors.divider),
                 const SizedBox(height: 16),
 
-                // First name + Surname
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -171,7 +170,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Ngày sinh: bấm vào để mở lịch chọn ngày
                 TextFormField(
                   controller: _birthdayController,
                   readOnly: true,
@@ -188,7 +186,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Giới tính
                 const Text(
                   'Gender',
                   style: TextStyle(fontSize: 13, color: AppColors.textGray),
@@ -205,7 +202,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Email
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -214,7 +210,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Password
                 TextFormField(
                   controller: _passwordController,
                   obscureText: _hidePassword,
@@ -246,7 +241,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Nút Sign Up
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -269,7 +263,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Quay lại đăng nhập
                 Center(
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
