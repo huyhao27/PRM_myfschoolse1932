@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">Quên mật khẩu</text>
+  <text x="24" y="110" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1C1E21" text-anchor="start">Đặt lại mật khẩu</text>
+  <text x="24" y="134" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Nhập tài khoản và mật khẩu mới của bạn.</text>
+  <text x="24" y="167" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Tài khoản (email hoặc số điện thoại)</text>
+  <rect x="24" y="175" width="312" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="24" y="242" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Mật khẩu mới</text>
+  <rect x="24" y="250" width="312" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="24" y="317" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Nhập lại mật khẩu mới</text>
+  <rect x="24" y="325" width="312" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <rect x="24" y="400" width="312" height="48" rx="10" fill="#F37021"/>
+  <text x="180.0" y="429.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#fff" text-anchor="middle">Đặt lại mật khẩu</text>
+  <text x="180" y="480" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#F37021" text-anchor="middle">Quay lại đăng nhập</text>
+</svg>

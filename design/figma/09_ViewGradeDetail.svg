@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">Điểm môn Toán</text>
+  <rect x="16" y="72" width="328" height="90" rx="12" fill="#F37021"/>
+  <text x="32" y="96" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#fff" text-anchor="start">Trung bình môn Toán - HK1</text>
+  <text x="32" y="140" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800" fill="#fff" text-anchor="start">8.8</text>
+  <text x="328" y="140" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#fff" text-anchor="end">GV: Thầy Phạm Quốc Bảo</text>
+  <rect x="16" y="178" width="328" height="30" rx="6" fill="#FFEDE0"/>
+  <text x="28" y="198" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="start">Loại điểm</text>
+  <text x="190" y="198" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">Hệ số</text>
+  <text x="250" y="198" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">Điểm</text>
+  <text x="320" y="198" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">Ngày</text>
+  <text x="28" y="232" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Miệng</text>
+  <text x="190" y="232" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">1</text>
+  <text x="250" y="232" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.0</text>
+  <text x="320" y="232" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">10/09</text>
+  <line x1="16" y1="244" x2="344" y2="244" stroke="#E4E6EB"/>
+  <text x="28" y="268" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">15 phút</text>
+  <text x="190" y="268" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">1</text>
+  <text x="250" y="268" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.5</text>
+  <text x="320" y="268" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">24/09</text>
+  <line x1="16" y1="280" x2="344" y2="280" stroke="#E4E6EB"/>
+  <text x="28" y="304" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">15 phút</text>
+  <text x="190" y="304" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">1</text>
+  <text x="250" y="304" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.0</text>
+  <text x="320" y="304" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">08/10</text>
+  <line x1="16" y1="316" x2="344" y2="316" stroke="#E4E6EB"/>
+  <text x="28" y="340" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">1 tiết</text>
+  <text x="190" y="340" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">2</text>
+  <text x="250" y="340" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.5</text>
+  <text x="320" y="340" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">15/10</text>
+  <line x1="16" y1="352" x2="344" y2="352" stroke="#E4E6EB"/>
+  <text x="28" y="376" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Giữa kỳ</text>
+  <text x="190" y="376" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">2</text>
+  <text x="250" y="376" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.0</text>
+  <text x="320" y="376" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">28/10</text>
+  <line x1="16" y1="388" x2="344" y2="388" stroke="#E4E6EB"/>
+  <text x="28" y="412" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Cuối kỳ</text>
+  <text x="190" y="412" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">3</text>
+  <text x="250" y="412" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.0</text>
+  <text x="320" y="412" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="middle">20/12</text>
+  <line x1="16" y1="424" x2="344" y2="424" stroke="#E4E6EB"/>
+  <rect x="16" y="460" width="328" height="80" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="486" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1C1E21" text-anchor="start">Nhận xét của giáo viên</text>
+  <text x="30" y="510" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">Em tiếp thu tốt, cần chú ý trình bày bài giải hình học.</text>
+</svg>

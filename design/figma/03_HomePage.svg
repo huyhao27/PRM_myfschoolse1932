@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">MyFSchool</text>
+  <text x="320" y="35" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600" fill="#fff" text-anchor="start">⎋</text>
+  <rect x="16" y="72" width="328" height="70" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="107" r="22" fill="#FFEDE0"/>
+  <text x="52" y="113" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#F37021" text-anchor="middle">NA</text>
+  <text x="86" y="100" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#1C1E21" text-anchor="start">Xin chào, Nguyễn Văn An</text>
+  <text x="86" y="120" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">Vai trò: PH (Phụ huynh)</text>
+  <rect x="16" y="158" width="40" height="22" rx="11" fill="#EEE"/>
+  <text x="36.0" y="173" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#65676B" text-anchor="middle">GV</text>
+  <rect x="64" y="158" width="80" height="22" rx="11" fill="#EEE"/>
+  <text x="104.0" y="173" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#65676B" text-anchor="middle">Manager</text>
+  <rect x="152" y="158" width="40" height="22" rx="11" fill="#F37021"/>
+  <text x="172.0" y="173" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">PH</text>
+  <rect x="200" y="158" width="40" height="22" rx="11" fill="#EEE"/>
+  <text x="220.0" y="173" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#65676B" text-anchor="middle">HS</text>
+  <rect x="16" y="200" width="160" height="152" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="96" y="276" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="400" fill="#F37021" text-anchor="middle">▦</text>
+  <text x="96" y="322" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1C1E21" text-anchor="middle">Thời khóa biểu</text>
+  <rect x="184" y="200" width="160" height="152" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="264" y="276" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="400" fill="#F37021" text-anchor="middle">★</text>
+  <text x="264" y="322" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1C1E21" text-anchor="middle">Bảng điểm</text>
+  <rect x="16" y="368" width="160" height="152" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="96" y="444" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="400" fill="#F37021" text-anchor="middle">✎</text>
+  <text x="96" y="490" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1C1E21" text-anchor="middle">Đơn từ</text>
+  <rect x="184" y="368" width="160" height="152" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="264" y="444" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="264" y="490" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1C1E21" text-anchor="middle">Câu lạc bộ</text>
+  <text x="180" y="560" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="400" fill="#65676B" text-anchor="middle">Các ô hiển thị theo vai trò (GV, Manager, PH, HS)</text>
+</svg>

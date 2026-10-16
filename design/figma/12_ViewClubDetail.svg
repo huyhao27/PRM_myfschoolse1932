@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">CLB Lập trình</text>
+  <rect x="0" y="56" width="360" height="150" rx="0" fill="#FFEDE0"/>
+  <text x="180" y="140" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#F37021" text-anchor="middle">&lt;/&gt;</text>
+  <text x="16" y="236" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#1C1E21" text-anchor="start">CLB Lập trình</text>
+  <text x="16" y="258" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">56 thành viên - Sinh hoạt T6, 15:30</text>
+  <rect x="16" y="276" width="328" height="90" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="300" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1C1E21" text-anchor="start">Giới thiệu</text>
+  <text x="30" y="322" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">Nơi học sinh yêu công nghệ cùng học Python,</text>
+  <text x="30" y="342" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">Flutter và tham gia các cuộc thi lập trình.</text>
+  <text x="20" y="396" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Chủ nhiệm CLB</text>
+  <text x="340" y="396" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1C1E21" text-anchor="end">Thầy Lê Văn Hùng</text>
+  <line x1="20" y1="408" x2="340" y2="408" stroke="#E4E6EB"/>
+  <text x="20" y="436" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Địa điểm</text>
+  <text x="340" y="436" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1C1E21" text-anchor="end">P.401 - Phòng máy</text>
+  <line x1="20" y1="448" x2="340" y2="448" stroke="#E4E6EB"/>
+  <text x="20" y="476" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Chủ tịch</text>
+  <text x="340" y="476" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1C1E21" text-anchor="end">Trần Minh Quân (11A2)</text>
+  <line x1="20" y1="488" x2="340" y2="488" stroke="#E4E6EB"/>
+  <circle cx="36" cy="540" r="20" fill="#FFEDE0"/>
+  <text x="36" y="545" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#F37021" text-anchor="middle">QT</text>
+  <circle cx="84" cy="540" r="20" fill="#FFEDE0"/>
+  <text x="84" y="545" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#F37021" text-anchor="middle">LH</text>
+  <circle cx="132" cy="540" r="20" fill="#FFEDE0"/>
+  <text x="132" y="545" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#F37021" text-anchor="middle">MP</text>
+  <circle cx="180" cy="540" r="20" fill="#FFEDE0"/>
+  <text x="180" y="545" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#F37021" text-anchor="middle">+53</text>
+  <rect x="16" y="640" width="328" height="48" rx="10" fill="#F37021"/>
+  <text x="180.0" y="669.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#fff" text-anchor="middle">Tham gia câu lạc bộ</text>
+</svg>

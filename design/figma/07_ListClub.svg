@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">Câu lạc bộ</text>
+  <rect x="16" y="72" width="328" height="40" rx="20" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="40" y="97" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Tìm câu lạc bộ</text>
+  <rect x="16" y="128" width="328" height="72" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="164" r="22" fill="#FFEDE0"/>
+  <text x="52" y="170" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="88" y="160" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1C1E21" text-anchor="start">CLB Bóng đá</text>
+  <text x="88" y="180" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">42 thành viên</text>
+  <rect x="248" y="153" width="84" height="22" rx="11" fill="#DDF3E4"/>
+  <text x="290.0" y="168" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#2E9E5B" text-anchor="middle">Đã tham gia</text>
+  <rect x="16" y="212" width="328" height="72" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="248" r="22" fill="#FFEDE0"/>
+  <text x="52" y="254" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="88" y="244" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1C1E21" text-anchor="start">CLB Âm nhạc</text>
+  <text x="88" y="264" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">28 thành viên</text>
+  <rect x="248" y="237" width="84" height="22" rx="11" fill="#FFEDE0"/>
+  <text x="290.0" y="252" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#F37021" text-anchor="middle">Chờ duyệt</text>
+  <rect x="16" y="296" width="328" height="72" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="332" r="22" fill="#FFEDE0"/>
+  <text x="52" y="338" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="88" y="328" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1C1E21" text-anchor="start">CLB Lập trình</text>
+  <text x="88" y="348" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">56 thành viên</text>
+  <rect x="248" y="321" width="84" height="22" rx="11" fill="#FFEDE0"/>
+  <text x="290.0" y="336" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#F37021" text-anchor="middle">Tham gia</text>
+  <rect x="16" y="380" width="328" height="72" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="416" r="22" fill="#FFEDE0"/>
+  <text x="52" y="422" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="88" y="412" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1C1E21" text-anchor="start">CLB Mỹ thuật</text>
+  <text x="88" y="432" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">19 thành viên</text>
+  <rect x="248" y="405" width="84" height="22" rx="11" fill="#FFEDE0"/>
+  <text x="290.0" y="420" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#F37021" text-anchor="middle">Tham gia</text>
+  <rect x="16" y="464" width="328" height="72" rx="12" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <circle cx="52" cy="500" r="22" fill="#FFEDE0"/>
+  <text x="52" y="506" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#F37021" text-anchor="middle">☺</text>
+  <text x="88" y="496" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1C1E21" text-anchor="start">CLB Bóng rổ</text>
+  <text x="88" y="516" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="start">35 thành viên</text>
+  <rect x="248" y="489" width="84" height="22" rx="11" fill="#FFEDE0"/>
+  <text x="290.0" y="504" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#F37021" text-anchor="middle">Tham gia</text>
+</svg>

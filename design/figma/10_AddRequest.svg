@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">Tạo đơn mới</text>
+  <text x="16" y="84" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Học sinh</text>
+  <rect x="16" y="92" width="328" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="119.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1C1E21" text-anchor="start">Nguyễn Văn An - 10A1  ▾</text>
+  <text x="16" y="160" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Loại đơn</text>
+  <rect x="16" y="168" width="328" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="195.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1C1E21" text-anchor="start">Xin nghỉ học  ▾</text>
+  <text x="16" y="236" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Từ ngày</text>
+  <rect x="16" y="244" width="156" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="271.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1C1E21" text-anchor="start">15/10/2026</text>
+  <text x="188" y="236" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Đến ngày</text>
+  <rect x="188" y="244" width="156" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="202" y="271.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1C1E21" text-anchor="start">16/10/2026</text>
+  <text x="16" y="320" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#1C1E21" text-anchor="start">Lý do</text>
+  <rect x="16" y="328" width="328" height="110" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="30" y="354" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#65676B" text-anchor="start">Con bị sốt, xin phép cho con nghỉ học 2 ngày...</text>
+  <rect x="16" y="454" width="328" height="44" rx="10" fill="#fff" stroke="#CED0D4" stroke-width="1"/>
+  <text x="180" y="481" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#65676B" text-anchor="middle">📎 Đính kèm giấy xác nhận (tùy chọn)</text>
+  <rect x="16" y="520" width="328" height="48" rx="10" fill="#F37021"/>
+  <text x="180.0" y="549.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#fff" text-anchor="middle">Gửi đơn</text>
+  <rect x="16" y="580" width="328" height="48" rx="10" fill="#fff" stroke="#F37021" stroke-width="1"/>
+  <text x="180.0" y="609.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#F37021" text-anchor="middle">Hủy</text>
+</svg>

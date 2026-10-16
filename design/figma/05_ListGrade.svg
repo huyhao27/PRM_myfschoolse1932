@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#fff"/>
+  <rect x="0" y="0" width="360" height="56" rx="0" fill="#F37021"/>
+  <text x="20" y="35" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#fff" text-anchor="start">←</text>
+  <text x="52" y="35" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#fff" text-anchor="start">Bảng điểm</text>
+  <rect x="16" y="72" width="328" height="96" rx="12" fill="#F37021"/>
+  <text x="32" y="98" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#fff" text-anchor="start">Điểm trung bình học kỳ 1</text>
+  <text x="32" y="140" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800" fill="#fff" text-anchor="start">8.42</text>
+  <text x="328" y="126" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#fff" text-anchor="end">Xếp loại: Giỏi</text>
+  <text x="328" y="146" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#fff" text-anchor="end">Hạnh kiểm: Tốt</text>
+  <rect x="16" y="184" width="328" height="30" rx="6" fill="#FFEDE0"/>
+  <text x="28" y="204" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="start">Môn học</text>
+  <text x="230" y="204" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">Giữa kỳ</text>
+  <text x="284" y="204" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">Cuối kỳ</text>
+  <text x="330" y="204" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#F37021" text-anchor="middle">TB</text>
+  <text x="28" y="238" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Toán</text>
+  <text x="230" y="238" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.5</text>
+  <text x="284" y="238" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">9.0</text>
+  <text x="330" y="238" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.8</text>
+  <line x1="16" y1="250" x2="344" y2="250" stroke="#E4E6EB"/>
+  <text x="28" y="274" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Ngữ văn</text>
+  <text x="230" y="274" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">7.5</text>
+  <text x="284" y="274" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.0</text>
+  <text x="330" y="274" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">7.8</text>
+  <line x1="16" y1="286" x2="344" y2="286" stroke="#E4E6EB"/>
+  <text x="28" y="310" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Tiếng Anh</text>
+  <text x="230" y="310" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">9.0</text>
+  <text x="284" y="310" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">9.5</text>
+  <text x="330" y="310" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.3</text>
+  <line x1="16" y1="322" x2="344" y2="322" stroke="#E4E6EB"/>
+  <text x="28" y="346" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Vật lý</text>
+  <text x="230" y="346" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.0</text>
+  <text x="284" y="346" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.5</text>
+  <text x="330" y="346" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.3</text>
+  <line x1="16" y1="358" x2="344" y2="358" stroke="#E4E6EB"/>
+  <text x="28" y="382" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Hóa học</text>
+  <text x="230" y="382" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">7.0</text>
+  <text x="284" y="382" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">7.5</text>
+  <text x="330" y="382" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">7.3</text>
+  <line x1="16" y1="394" x2="344" y2="394" stroke="#E4E6EB"/>
+  <text x="28" y="418" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Sinh học</text>
+  <text x="230" y="418" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.5</text>
+  <text x="284" y="418" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.0</text>
+  <text x="330" y="418" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.2</text>
+  <line x1="16" y1="430" x2="344" y2="430" stroke="#E4E6EB"/>
+  <text x="28" y="454" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Lịch sử</text>
+  <text x="230" y="454" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">8.0</text>
+  <text x="284" y="454" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">9.0</text>
+  <text x="330" y="454" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">8.7</text>
+  <line x1="16" y1="466" x2="344" y2="466" stroke="#E4E6EB"/>
+  <text x="28" y="490" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="start">Tin học</text>
+  <text x="230" y="490" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">9.5</text>
+  <text x="284" y="490" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1C1E21" text-anchor="middle">10</text>
+  <text x="330" y="490" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F37021" text-anchor="middle">9.8</text>
+  <line x1="16" y1="502" x2="344" y2="502" stroke="#E4E6EB"/>
+  <text x="180" y="550" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="400" fill="#65676B" text-anchor="middle">Chạm vào môn học để xem chi tiết điểm</text>
+</svg>
