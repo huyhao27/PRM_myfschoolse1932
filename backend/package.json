@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "db:init": "node sql/init.js",
-    "test": "node --test test/api.test.js"
+    "test": "node --test \"test/*.test.js\""
   },
   "keywords": [],
   "author": "",

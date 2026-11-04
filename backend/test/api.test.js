@@ -63,6 +63,22 @@ describe('login', () => {
     });
   }
 
+  for (const [phone, role] of [
+    ['0901000001', 'GV'],
+    ['0901000002', 'Manager'],
+    ['0901234567', 'PH'],
+    ['0901000003', 'HS'],
+    ['0901000004', 'HS'],
+    ['0901000005', 'GV'],
+  ]) {
+    test(`phone login ${phone} as ${role}`, async () => {
+      const r = await login(phone, '123456');
+      assert.equal(r.status, 200);
+      assert.equal(r.json.user.role, role);
+      assert.equal(r.json.user.phone, phone);
+    });
+  }
+
   test('success by phone', async () => {
     const r = await login('0901234567', '123456');
     assert.equal(r.status, 200);

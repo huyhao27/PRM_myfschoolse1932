@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const userDao = require('../dao/UserDao');
+const { HttpError } = require('../lib/http');
 
 function requireAuth(req, res, next) {
   const h = req.headers.authorization || '';
@@ -15,4 +17,15 @@ function requireAuth(req, res, next) {
   }
 }
 
-module.exports = { requireAuth };
+// Loads the current user (role comes from the database, not from the token) into req.user.
+async function loadUser(req, res, next) {
+  const user = await userDao.findProfile(req.auth.sub);
+  if (!user) return res.status(401).json({ message: 'Invalid token' });
+  req.user = user;
+  next();
+}
+
+const requireRole = (...roles) => (req, res, next) =>
+  roles.includes(req.user.role) ? next() : next(new HttpError(403, 'Forbidden for your role'));
+
+module.exports = { requireAuth, loadUser, requireRole };

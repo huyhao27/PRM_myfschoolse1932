@@ -106,4 +106,4 @@ try {
 }
 
 Write-Host ''
-Write-Host 'Backend is ready. Demo accounts (password 123456): gv@fschool.vn, manager@fschool.vn, ph@fschool.vn, hs@fschool.vn' -ForegroundColor Green
+Write-Host 'Backend is ready. Demo accounts (password 123456, app logs in by phone): gv 0901000001, manager 0901000002, ph 0901234567, hs 0901000003' -ForegroundColor Green

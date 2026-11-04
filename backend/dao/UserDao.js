@@ -25,6 +25,16 @@ class UserDao {
     return r.recordset[0] || null;
   }
 
+  // Like findById plus the class name; used by authorization code, never sent to clients as-is.
+  async findProfile(id) {
+    const pool = await getPool();
+    const r = await pool
+      .request()
+      .input('id', sql.Int, id)
+      .query(`SELECT ${PUBLIC_COLS}, className FROM dbo.Users WHERE id = @id`);
+    return r.recordset[0] || null;
+  }
+
   async updatePasswordHash(id, passwordHash) {
     const pool = await getPool();
     const r = await pool
@@ -50,6 +60,16 @@ class UserDao {
            INSERT INTO dbo.Users (name, email, phone, passwordHash, role)
            VALUES (@name, @email, @phone, @hash, @role)`
       );
+  }
+
+  // Idempotent: fills in the phone of an existing user only while it is still NULL.
+  async setPhoneIfMissing(email, phone) {
+    const pool = await getPool();
+    await pool
+      .request()
+      .input('email', sql.NVarChar(150), email)
+      .input('phone', sql.VarChar(20), phone)
+      .query('UPDATE dbo.Users SET phone = @phone WHERE email = @email AND phone IS NULL');
   }
 
   // Runs a schema batch (DDL). Kept here so all SQL stays in the DAO layer.

@@ -33,4 +33,15 @@ async function closePool() {
   }
 }
 
-module.exports = { sql, getPool, closePool };
+// Parameterized query helper. params: { name: [sql.Type, value] }. Returns the full mssql result.
+async function run(text, params = {}) {
+  const req = (await getPool()).request();
+  for (const [name, [type, value]] of Object.entries(params)) req.input(name, type, value);
+  return req.query(text);
+}
+
+async function query(text, params = {}) {
+  return (await run(text, params)).recordset;
+}
+
+module.exports = { sql, getPool, closePool, run, query };
