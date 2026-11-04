@@ -1,0 +1,14 @@
+# build output and local state
+obj/
+.vs/
+packages/
+*.user
+nuget.exe
+connections.config
+tools/site.pid
+tools/site.log*
+bin/MyfschoolWeb.dll
+bin/MyfschoolWeb.dll.config
+bin/MyfschoolWeb.pdb
+bin/MyfschoolHost.exe
+bin/*.pdb

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<connectionStrings>
+  <add name="FSchoolDb" connectionString="Server=localhost,1433;Database=FSchoolDB;User Id=YOUR_SQL_LOGIN;Password=CHANGE_ME;Encrypt=False;TrustServerCertificate=True;Connect Timeout=10" providerName="System.Data.SqlClient" />
+</connectionStrings>
