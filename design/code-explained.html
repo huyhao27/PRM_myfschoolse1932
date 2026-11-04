@@ -1,0 +1,745 @@
+<title>MyFSchool Code Explained</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: một thanh chọn file ở trên, bên dưới là bảng từng dòng code kèm lời giải thích bên phải */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --fg: #1c1e21;
+    --muted: #65676b;
+    --line: #e4e6ea;
+    --accent: #1877f2;
+    --accent-soft: #e7f0fe;
+    --code-bg: #f0f2f5;
+    --code-fg: #17233b;
+    --note-bg: #fff8e1;
+    --note-fg: #5b4a00;
+    --font-ui: "Be Vietnam Pro", system-ui, "Segoe UI", sans-serif;
+    --font-code: "JetBrains Mono", Consolas, "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161a; --panel: #1d2026; --fg: #e8eaed; --muted: #9aa0a8; --line: #2c3037;
+      --accent: #6aa7ff; --accent-soft: #1e2c44; --code-bg: #171a20; --code-fg: #cfe0ff;
+      --note-bg: #2b2616; --note-fg: #f0d98a; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161a; --panel: #1d2026; --fg: #e8eaed; --muted: #9aa0a8; --line: #2c3037;
+    --accent: #6aa7ff; --accent-soft: #1e2c44; --code-bg: #171a20; --code-fg: #cfe0ff;
+    --note-bg: #2b2616; --note-fg: #f0d98a; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 24px 48px; }
+  .wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+  header h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+  header p { margin: 0; color: var(--muted); max-width: 70ch; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tab { font: inherit; font-family: var(--font-code); font-size: 13px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+  .tab:hover { border-color: var(--accent); }
+  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .file-intro { background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; }
+  .file-intro strong { font-family: var(--font-code); font-size: 13px; }
+  .file-intro p { margin: 4px 0 0; }
+
+  .code-table { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 44px minmax(0, 1.25fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .num { font-family: var(--font-code); font-size: 12px; color: var(--muted); text-align: right; padding: 6px 10px 6px 0; background: var(--code-bg); user-select: none; font-variant-numeric: tabular-nums; }
+  .code { font-family: var(--font-code); font-size: 13px; line-height: 1.6; white-space: pre; padding: 6px 12px; background: var(--code-bg); color: var(--code-fg); overflow-x: auto; min-width: 0; }
+  .note { padding: 6px 14px; font-size: 13.5px; color: var(--fg); min-width: 0; }
+  .note.has { background: var(--note-bg); color: var(--note-fg); }
+  .row.blank .num, .row.blank .code { padding-block: 0; line-height: 0.9; }
+  .row.blank { border-bottom-color: transparent; }
+
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 36px minmax(0, 1fr); }
+    .note { grid-column: 2; padding-top: 4px; padding-bottom: 8px; }
+    .note:not(.has) { display: none; }
+    .num { grid-row: span 2; }
+    .row.blank .num { grid-row: auto; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>MyFSchool: giải thích từng dòng code</h1>
+    <p>Đây là code thật của app Flutter (trong file chỉ có vài comment tiếng Anh ngắn ở đầu hàm). Cột bên trái là code, cột bên phải giải thích dòng đó làm gì. Bấm tên file để chuyển qua lại.</p>
+  </header>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="file-intro" id="intro"></div>
+  <div class="code-table" id="table"></div>
+</div>
+
+<script type="text/plain" id="f-main" data-name="main.dart" data-path="lib/main.dart" data-intro="Điểm khởi động của app. Dart chạy hàm main đầu tiên, rồi mở màn hình đăng nhập.">
+import 'package:flutter/material.dart'; ¦ Nạp thư viện Material của Flutter (có sẵn nút, ô nhập, thanh tiêu đề, theme...)
+import 'screen/login_screen.dart'; ¦ Nạp file màn hình đăng nhập để dùng class LoginScreen bên dưới
+
+void main() { ¦ Hàm main: nơi chương trình bắt đầu chạy
+  runApp(const MyApp()); ¦ runApp đưa widget MyApp lên màn hình. const nghĩa là đối tượng này không bao giờ đổi
+} ¦ Hết hàm main
+
+class MyApp extends StatelessWidget { ¦ MyApp là widget gốc. StatelessWidget = giao diện cố định, không có dữ liệu thay đổi
+  const MyApp({super.key}); ¦ Hàm khởi tạo. super.key chuyển key cho class cha để Flutter nhận diện widget
+
+  @override ¦ Báo rằng hàm bên dưới ghi đè hàm có sẵn của class cha
+  Widget build(BuildContext context) { ¦ build trả về giao diện của widget. context cho biết vị trí widget trong cây giao diện
+    return MaterialApp( ¦ MaterialApp là khung app theo phong cách Material (quản lý theme, điều hướng)
+      title: 'MyFSchool', ¦ Tên app, hệ điều hành dùng để hiển thị trong danh sách ứng dụng đang mở
+      debugShowCheckedModeBanner: false, ¦ Tắt nhãn "DEBUG" ở góc phải màn hình
+      theme: ThemeData( ¦ Cấu hình giao diện chung cho cả app
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1877F2)), ¦ Từ một màu gốc (xanh Facebook) Flutter tự sinh cả bộ màu. 0xFF là độ đục 100%, 1877F2 là mã màu
+        useMaterial3: true, ¦ Bật kiểu giao diện Material 3 (mới hơn)
+      ), ¦ Hết ThemeData
+      home: const LoginScreen(), ¦ Màn hình đầu tiên khi mở app là LoginScreen
+    ); ¦ Hết MaterialApp
+  } ¦ Hết hàm build
+} ¦ Hết class MyApp
+</script>
+
+<script type="text/plain" id="f-colors" data-name="app_colors.dart" data-path="lib/screen/app_colors.dart" data-intro="Gom các màu vào một chỗ. Muốn đổi màu cả app chỉ cần sửa file này.">
+import 'package:flutter/material.dart'; ¦ Nạp thư viện Material để dùng kiểu Color
+
+class AppColors { ¦ Class chỉ để chứa các hằng số màu, không cần tạo đối tượng
+  static const Color blue = Color(0xFF1877F2); ¦ static: dùng trực tiếp AppColors.blue. Xanh Facebook cho nút và viền khi focus
+  static const Color textDark = Color(0xFF1C1E21); ¦ Màu chữ đậm (gần đen) cho tiêu đề và chữ chính
+  static const Color textGray = Color(0xFF65676B); ¦ Màu chữ xám cho nhãn, gợi ý, chữ phụ
+  static const Color border = Color(0xFFCED0D4); ¦ Màu viền xám nhạt của các ô nhập
+  static const Color divider = Color(0xFFDADDE1); ¦ Màu đường kẻ ngang phân cách
+} ¦ Hết class
+</script>
+
+<script type="text/plain" id="f-validators" data-name="validators.dart" data-path="lib/screen/validators.dart" data-intro="Hàm kiểm tra email hoặc số điện thoại, dùng chung cho Login và Sign Up. Quy ước: hợp lệ thì trả về null, sai thì trả về câu báo lỗi.">
+// Returns null when the input is valid, otherwise the error message. ¦ Comment (tiếng Anh) đặt trên đầu hàm: giải thích quy ước trả về
+String? validateEmailOrPhone(String? value) { ¦ Nhận chuỗi người dùng nhập (có thể null), trả về String? (null nếu ổn, hoặc câu lỗi)
+  final text = value?.trim() ?? ''; ¦ Bỏ khoảng trắng hai đầu. Nếu value là null thì dùng chuỗi rỗng
+
+  if (text.isEmpty) { ¦ Nếu người dùng chưa nhập gì
+    return 'Enter your mobile number or email'; ¦ Trả về lời nhắc, Flutter sẽ hiện chữ đỏ dưới ô nhập
+  } ¦ Hết if
+
+  // Phone: 9-11 digits, optional leading + ¦ Comment ngắn mô tả quy tắc của regex bên dưới
+  final isPhone = RegExp(r'^\+?\d{9,11}$').hasMatch(text); ¦ Kiểm tra số điện thoại: ^ đầu chuỗi, \+? có thể có dấu +, \d{9,11} từ 9 đến 11 chữ số, $ cuối chuỗi
+
+  // Email: name@domain.tld ¦ Comment ngắn mô tả quy tắc của regex bên dưới
+  final isEmail = RegExp(r'^[\w.+-]+@[\w-]+(\.[\w-]+)+$').hasMatch(text); ¦ Kiểm tra email: phần tên, dấu @, tên miền, rồi ít nhất một đuôi như .com
+
+  if (!isPhone && !isEmail) { ¦ Nếu không phải số điện thoại và cũng không phải email
+    return 'Enter a valid email address or mobile number'; ¦ Báo lỗi định dạng
+  } ¦ Hết if
+  return null; ¦ Hợp lệ thì trả null, nghĩa là "không có lỗi"
+} ¦ Hết hàm
+</script>
+
+<script type="text/plain" id="f-home" data-name="home_screen.dart" data-path="lib/screen/home_screen.dart" data-intro="Trang chủ hiện sau khi đăng nhập thành công. Nhận email từ màn hình trước để hiển thị.">
+import 'package:flutter/material.dart'; ¦ Nạp thư viện Material
+import 'login_screen.dart'; ¦ Nạp màn hình đăng nhập để nút đăng xuất quay về đó
+
+class HomeScreen extends StatelessWidget { ¦ Màn hình tĩnh: nội dung không tự thay đổi nên dùng StatelessWidget
+  const HomeScreen({super.key, required this.email}); ¦ Hàm khởi tạo. required this.email bắt buộc truyền email khi tạo màn hình
+
+  final String email; ¦ Lưu email nhận được. final = gán một lần, không đổi
+
+  @override ¦ Ghi đè hàm của class cha
+  Widget build(BuildContext context) { ¦ Hàm dựng giao diện
+    return Scaffold( ¦ Scaffold là bộ khung trang: có AppBar, thân trang, nút nổi...
+      appBar: AppBar( ¦ Thanh tiêu đề phía trên
+        title: const Text('Home'), ¦ Chữ tiêu đề
+        actions: [ ¦ Danh sách nút nằm bên phải thanh tiêu đề
+          IconButton( ¦ Nút bấm hình icon
+            icon: const Icon(Icons.logout), ¦ Icon đăng xuất có sẵn của Flutter
+            onPressed: () { ¦ Hàm chạy khi bấm nút
+              Navigator.pushReplacement( ¦ Chuyển sang trang khác và thay thế trang hiện tại, bấm Back sẽ không quay lại Home
+                context, ¦ Vị trí hiện tại, Navigator cần để biết đang ở đâu
+                MaterialPageRoute(builder: (_) => const LoginScreen()), ¦ Tạo trang mới là LoginScreen. Dấu _ là tham số không dùng tới
+              ); ¦ Hết pushReplacement
+            }, ¦ Hết hàm onPressed
+          ), ¦ Hết IconButton
+        ], ¦ Hết danh sách actions
+      ), ¦ Hết AppBar
+      body: Center( ¦ Thân trang: Center đặt nội dung ở giữa
+        child: Column( ¦ Column xếp các widget con theo chiều dọc
+          mainAxisSize: MainAxisSize.min, ¦ Cột chỉ cao vừa đủ nội dung, không giãn hết màn hình
+          children: [ ¦ Danh sách widget con
+            const Icon(Icons.check_circle, color: Colors.green, size: 72), ¦ Icon dấu tích tròn, màu xanh lá, cỡ 72
+            const SizedBox(height: 16), ¦ Khoảng trống cao 16 để tách các phần
+            const Text('Login successful!', style: TextStyle(fontSize: 22)), ¦ Dòng chữ thông báo, cỡ chữ 22
+            const SizedBox(height: 8), ¦ Khoảng trống cao 8
+            Text(email), ¦ Hiện email nhận được từ màn hình trước
+          ], ¦ Hết children
+        ), ¦ Hết Column
+      ), ¦ Hết Center
+    ); ¦ Hết Scaffold
+  } ¦ Hết hàm build
+} ¦ Hết class HomeScreen
+</script>
+
+<script type="text/plain" id="f-login" data-name="login_screen.dart" data-path="lib/screen/login_screen.dart" data-intro="Màn hình đăng nhập. Là StatefulWidget vì có dữ liệu thay đổi (ẩn hoặc hiện mật khẩu). Phần trên cuộn được, nút Create new account luôn nằm ở đáy.">
+import 'package:flutter/material.dart'; ¦ Nạp thư viện Material
+
+import 'app_colors.dart'; ¦ Nạp bảng màu
+import 'home_screen.dart'; ¦ Nạp trang chủ để chuyển tới sau khi đăng nhập
+import 'signup_screen.dart'; ¦ Nạp màn hình đăng ký
+import 'validators.dart'; ¦ Nạp hàm kiểm tra email / số điện thoại
+
+class LoginScreen extends StatefulWidget { ¦ StatefulWidget: giao diện có thể đổi theo dữ liệu (state)
+  const LoginScreen({super.key}); ¦ Hàm khởi tạo
+
+  @override ¦ Ghi đè hàm của class cha
+  State<LoginScreen> createState() => _LoginScreenState(); ¦ Tạo đối tượng State chứa dữ liệu. Dấu _ đầu tên = chỉ dùng trong file này
+} ¦ Hết class LoginScreen
+
+class _LoginScreenState extends State<LoginScreen> { ¦ Class State: nơi lưu dữ liệu và dựng giao diện
+  final _formKey = GlobalKey<FormState>(); ¦ Chìa khóa của Form, dùng để gọi validate() kiểm tra tất cả ô cùng lúc
+  final _emailController = TextEditingController(); ¦ Bộ điều khiển ô email: đọc chữ người dùng gõ
+  final _passwordController = TextEditingController(); ¦ Bộ điều khiển ô mật khẩu
+  bool _hidePassword = true; ¦ true = mật khẩu đang bị che bằng dấu chấm
+
+  @override ¦ Ghi đè hàm của class cha
+  void dispose() { ¦ dispose chạy khi màn hình bị đóng
+    _emailController.dispose(); ¦ Giải phóng controller email để không tốn bộ nhớ
+    _passwordController.dispose(); ¦ Giải phóng controller mật khẩu
+    super.dispose(); ¦ Gọi dispose của class cha để dọn nốt phần còn lại
+  } ¦ Hết dispose
+
+  // Goes to the home screen only if every field is valid. ¦ Comment đầu hàm: nói hàm này làm gì
+  void _logIn() { ¦ Hàm xử lý khi bấm nút Log in
+    if (_formKey.currentState!.validate()) { ¦ Kiểm tra mọi ô trong Form. Dấu ! khẳng định currentState không null. Trả true nếu tất cả hợp lệ
+      Navigator.pushReplacement( ¦ Chuyển trang và thay thế trang hiện tại (Back không quay về Login)
+        context, ¦ Vị trí hiện tại trong cây giao diện
+        MaterialPageRoute( ¦ Tạo một trang mới có hiệu ứng chuyển
+          builder: (_) => HomeScreen(email: _emailController.text.trim()), ¦ Dựng HomeScreen và truyền email (đã bỏ khoảng trắng) sang
+        ), ¦ Hết MaterialPageRoute
+      ); ¦ Hết pushReplacement
+    } ¦ Hết if
+  } ¦ Hết _logIn
+
+  // Shared style for the text fields. ¦ Comment đầu hàm: kiểu ô nhập dùng chung
+  InputDecoration _inputStyle(String label, {Widget? suffix}) { ¦ Hàm tạo kiểu ô nhập dùng chung cho 2 ô. suffix là widget tùy chọn ở cuối ô
+    return InputDecoration( ¦ InputDecoration mô tả hình dáng ô nhập
+      labelText: label, ¦ Nhãn nổi trong ô
+      labelStyle: const TextStyle(color: AppColors.textGray), ¦ Nhãn màu xám
+      suffixIcon: suffix, ¦ Widget ở cuối ô (ở đây là nút Show/Hide)
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18), ¦ Khoảng đệm trong ô: ngang 16, dọc 18
+      border: OutlineInputBorder( ¦ Viền mặc định
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.border), ¦ Viền màu xám nhạt
+      ), ¦ Hết border
+      enabledBorder: OutlineInputBorder( ¦ Viền khi ô đang bình thường (chưa bấm vào)
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.border), ¦ Viền xám nhạt
+      ), ¦ Hết enabledBorder
+      focusedBorder: OutlineInputBorder( ¦ Viền khi đang bấm vào ô
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.blue, width: 1.5), ¦ Viền xanh, dày 1.5 để nổi bật
+      ), ¦ Hết focusedBorder
+    ); ¦ Hết InputDecoration
+  } ¦ Hết _inputStyle
+
+  @override ¦ Ghi đè hàm của class cha
+  Widget build(BuildContext context) { ¦ Dựng giao diện. Chạy lại mỗi khi gọi setState
+    return Scaffold( ¦ Bộ khung trang
+      backgroundColor: Colors.white, ¦ Nền trắng
+      body: SafeArea( ¦ SafeArea tránh vùng tai thỏ, thanh trạng thái
+        child: Padding( ¦ Padding thêm khoảng đệm quanh nội dung
+          padding: const EdgeInsets.symmetric(horizontal: 24), ¦ Đệm hai bên trái phải 24
+          child: Column( ¦ Cột chính xếp dọc: phần trên cuộn được, phần dưới cố định
+            children: [ ¦ Danh sách widget con
+              Expanded( ¦ Expanded chiếm hết chiều cao còn lại, đẩy phần dưới xuống đáy
+                child: SingleChildScrollView( ¦ Cho phép cuộn khi nội dung dài hoặc bàn phím bật lên
+                  child: Form( ¦ Form gom các ô nhập để kiểm tra cùng lúc
+                    key: _formKey, ¦ Gắn chìa khóa để gọi validate()
+                    child: Column( ¦ Cột chứa các phần của form
+                      children: [ ¦ Danh sách widget con
+                        const SizedBox(height: 24), ¦ Khoảng trống phía trên
+                        const Text( ¦ Dòng chữ ngôn ngữ
+                          'English (US)', ¦ Nội dung chữ
+                          style: TextStyle(fontSize: 13, color: AppColors.textGray), ¦ Cỡ 13, màu xám
+                        ), ¦ Hết Text
+                        const SizedBox(height: 48), ¦ Khoảng trống 48 trước logo
+
+                        Container( ¦ Container là hộp có thể tô màu, đặt kích thước. Dùng làm logo
+                          width: 80, ¦ Rộng 80
+                          height: 80, ¦ Cao 80
+                          decoration: const BoxDecoration( ¦ Trang trí hộp
+                            color: AppColors.blue, ¦ Tô màu xanh
+                            shape: BoxShape.circle, ¦ Hình tròn
+                          ), ¦ Hết BoxDecoration
+                          alignment: Alignment.center, ¦ Đặt chữ vào giữa hộp
+                          child: const Text( ¦ Chữ "f" trong logo
+                            'f', ¦ Nội dung
+                            style: TextStyle( ¦ Kiểu chữ
+                              color: Colors.white, ¦ Chữ trắng
+                              fontSize: 56, ¦ Cỡ chữ lớn
+                              fontWeight: FontWeight.bold, ¦ In đậm
+                              height: 1.1, ¦ Chiều cao dòng, giúp chữ nằm cân giữa vòng tròn
+                            ), ¦ Hết TextStyle
+                          ), ¦ Hết Text
+                        ), ¦ Hết Container
+                        const SizedBox(height: 48), ¦ Khoảng trống dưới logo
+
+                        TextFormField( ¦ Ô nhập có hỗ trợ kiểm tra dữ liệu. Đây là ô email
+                          controller: _emailController, ¦ Gắn controller để đọc chữ
+                          keyboardType: TextInputType.emailAddress, ¦ Hiện bàn phím có phím @
+                          decoration: _inputStyle('Mobile number or email address'), ¦ Dùng kiểu ô đã định nghĩa ở trên
+                          validator: validateEmailOrPhone, ¦ Hàm kiểm tra. Trả về lỗi thì hiện chữ đỏ dưới ô
+                        ), ¦ Hết ô email
+                        const SizedBox(height: 12), ¦ Khoảng cách giữa hai ô
+
+                        TextFormField( ¦ Ô mật khẩu
+                          controller: _passwordController, ¦ Gắn controller
+                          obscureText: _hidePassword, ¦ true thì che chữ bằng dấu chấm
+                          decoration: _inputStyle( ¦ Dùng kiểu ô chung, thêm nút ở cuối
+                            'Password', ¦ Nhãn của ô
+                            suffix: TextButton( ¦ Nút chữ Show/Hide ở cuối ô
+                              onPressed: () { ¦ Chạy khi bấm nút
+                                setState(() => _hidePassword = !_hidePassword); ¦ setState báo Flutter vẽ lại. Đảo giá trị true/false
+                              }, ¦ Hết onPressed
+                              child: Text( ¦ Chữ trên nút
+                                _hidePassword ? 'Show' : 'Hide', ¦ Đang che thì hiện "Show", đang hiện thì hiện "Hide"
+                                style: const TextStyle(color: AppColors.textGray), ¦ Màu xám
+                              ), ¦ Hết Text
+                            ), ¦ Hết TextButton
+                          ), ¦ Hết _inputStyle
+                          validator: (value) { ¦ Hàm kiểm tra mật khẩu, value là chữ đã nhập
+                            if (value == null || value.length < 6) { ¦ Mật khẩu rỗng hoặc ngắn hơn 6 ký tự
+                              return 'Password must be at least 6 characters'; ¦ Trả về câu báo lỗi
+                            } ¦ Hết if
+                            return null; ¦ Hợp lệ
+                          }, ¦ Hết validator
+                        ), ¦ Hết ô mật khẩu
+                        const SizedBox(height: 20), ¦ Khoảng trống trước nút
+
+                        SizedBox( ¦ SizedBox ép kích thước cho nút
+                          width: double.infinity, ¦ Rộng hết cỡ có thể
+                          height: 48, ¦ Cao 48
+                          child: ElevatedButton( ¦ Nút nổi
+                            onPressed: _logIn, ¦ Bấm thì chạy hàm _logIn
+                            style: ElevatedButton.styleFrom( ¦ Tùy chỉnh kiểu nút
+                              backgroundColor: AppColors.blue, ¦ Nền xanh
+                              foregroundColor: Colors.white, ¦ Chữ trắng
+                              elevation: 0, ¦ Bỏ bóng đổ
+                              shape: RoundedRectangleBorder( ¦ Hình dạng nút
+                                borderRadius: BorderRadius.circular(24), ¦ Bo tròn kiểu viên thuốc
+                              ), ¦ Hết shape
+                            ), ¦ Hết styleFrom
+                            child: const Text( ¦ Chữ trên nút
+                              'Log in', ¦ Nội dung
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), ¦ Cỡ 16, in đậm
+                            ), ¦ Hết Text
+                          ), ¦ Hết ElevatedButton
+                        ), ¦ Hết SizedBox
+                        const SizedBox(height: 20), ¦ Khoảng trống dưới nút
+
+                        const Text( ¦ Dòng "Forgot password?"
+                          'Forgot password?', ¦ Nội dung
+                          style: TextStyle( ¦ Kiểu chữ
+                            fontSize: 15, ¦ Cỡ 15
+                            fontWeight: FontWeight.w600, ¦ Độ đậm vừa
+                            color: AppColors.textDark, ¦ Màu đậm
+                          ), ¦ Hết TextStyle
+                        ), ¦ Hết Text
+                      ], ¦ Hết children của form
+                    ), ¦ Hết Column trong Form
+                  ), ¦ Hết Form
+                ), ¦ Hết SingleChildScrollView
+              ), ¦ Hết Expanded
+
+              SizedBox( ¦ Phần dưới cố định: nút tạo tài khoản
+                width: double.infinity, ¦ Rộng hết cỡ
+                height: 48, ¦ Cao 48
+                child: OutlinedButton( ¦ Nút chỉ có viền, nền trong
+                  onPressed: () { ¦ Chạy khi bấm
+                    Navigator.push( ¦ Mở trang mới phía trên, Back sẽ quay lại Login
+                      context, ¦ Vị trí hiện tại
+                      MaterialPageRoute(builder: (_) => const SignUpScreen()), ¦ Trang mới là màn hình đăng ký
+                    ); ¦ Hết push
+                  }, ¦ Hết onPressed
+                  style: OutlinedButton.styleFrom( ¦ Tùy chỉnh kiểu nút
+                    foregroundColor: AppColors.blue, ¦ Chữ xanh
+                    side: const BorderSide(color: AppColors.blue, width: 1.5), ¦ Viền xanh dày 1.5
+                    shape: RoundedRectangleBorder( ¦ Hình dạng nút
+                      borderRadius: BorderRadius.circular(24), ¦ Bo tròn
+                    ), ¦ Hết shape
+                  ), ¦ Hết styleFrom
+                  child: const Text( ¦ Chữ trên nút
+                    'Create new account', ¦ Nội dung
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600), ¦ Cỡ 16, đậm vừa
+                  ), ¦ Hết Text
+                ), ¦ Hết OutlinedButton
+              ), ¦ Hết SizedBox
+              const SizedBox(height: 24), ¦ Khoảng trống
+              const Text( ¦ Chữ Meta ở đáy
+                '∞ Meta', ¦ Nội dung
+                style: TextStyle( ¦ Kiểu chữ
+                  fontSize: 14, ¦ Cỡ 14
+                  fontWeight: FontWeight.w600, ¦ Đậm vừa
+                  color: AppColors.textGray, ¦ Màu xám
+                ), ¦ Hết TextStyle
+              ), ¦ Hết Text
+              const SizedBox(height: 20), ¦ Khoảng trống cuối trang
+            ], ¦ Hết children của cột chính
+          ), ¦ Hết Column chính
+        ), ¦ Hết Padding
+      ), ¦ Hết SafeArea
+    ); ¦ Hết Scaffold
+  } ¦ Hết build
+} ¦ Hết class State
+</script>
+
+<script type="text/plain" id="f-signup" data-name="signup_screen.dart" data-path="lib/screen/signup_screen.dart" data-intro="Màn hình đăng ký. Cùng cách làm với Login, thêm họ tên, ngày sinh (mở lịch), giới tính (3 ô chọn) và dòng điều khoản.">
+import 'package:flutter/material.dart'; ¦ Nạp thư viện Material
+
+import 'app_colors.dart'; ¦ Nạp bảng màu
+import 'home_screen.dart'; ¦ Nạp trang chủ
+import 'validators.dart'; ¦ Nạp hàm kiểm tra email / số điện thoại
+
+class SignUpScreen extends StatefulWidget { ¦ Màn hình có dữ liệu thay đổi nên dùng StatefulWidget
+  const SignUpScreen({super.key}); ¦ Hàm khởi tạo
+
+  @override ¦ Ghi đè hàm của class cha
+  State<SignUpScreen> createState() => _SignUpScreenState(); ¦ Tạo đối tượng State
+} ¦ Hết class
+
+class _SignUpScreenState extends State<SignUpScreen> { ¦ Nơi lưu dữ liệu của màn hình đăng ký
+  final _formKey = GlobalKey<FormState>(); ¦ Chìa khóa của Form để validate
+  final _firstNameController = TextEditingController(); ¦ Controller ô First name
+  final _surnameController = TextEditingController(); ¦ Controller ô Surname
+  final _birthdayController = TextEditingController(); ¦ Controller ô ngày sinh
+  final _emailController = TextEditingController(); ¦ Controller ô email
+  final _passwordController = TextEditingController(); ¦ Controller ô mật khẩu
+  bool _hidePassword = true; ¦ true = mật khẩu đang bị che
+  String _gender = 'Female'; ¦ Giới tính đang chọn, mặc định là Female
+
+  @override ¦ Ghi đè hàm của class cha
+  void dispose() { ¦ Chạy khi đóng màn hình
+    _firstNameController.dispose(); ¦ Giải phóng controller First name
+    _surnameController.dispose(); ¦ Giải phóng controller Surname
+    _birthdayController.dispose(); ¦ Giải phóng controller ngày sinh
+    _emailController.dispose(); ¦ Giải phóng controller email
+    _passwordController.dispose(); ¦ Giải phóng controller mật khẩu
+    super.dispose(); ¦ Gọi dispose của class cha
+  } ¦ Hết dispose
+
+  Future<void> _pickBirthday() async { ¦ Hàm bất đồng bộ: phải chờ người dùng chọn ngày xong mới đi tiếp
+    final picked = await showDatePicker( ¦ Mở lịch chọn ngày. await = chờ kết quả rồi mới chạy dòng sau
+      context: context, ¦ Vị trí hiện tại
+      initialDate: DateTime(2000, 1, 1), ¦ Ngày lịch hiện lúc mở: 01/01/2000
+      firstDate: DateTime(1900), ¦ Ngày sớm nhất được chọn
+      lastDate: DateTime.now(), ¦ Ngày muộn nhất: hôm nay (không chọn ngày tương lai)
+    ); ¦ Hết showDatePicker
+    if (picked != null) { ¦ Nếu người dùng đã chọn (không bấm Cancel)
+      final day = picked.day.toString().padLeft(2, '0'); ¦ Lấy ngày thành chuỗi, thêm số 0 phía trước cho đủ 2 chữ số (5 thành 05)
+      final month = picked.month.toString().padLeft(2, '0'); ¦ Tương tự cho tháng
+      _birthdayController.text = '$day / $month / ${picked.year}'; ¦ Ghi vào ô theo dạng dd / mm / yyyy. $ chèn giá trị biến vào chuỗi
+    } ¦ Hết if
+  } ¦ Hết _pickBirthday
+
+  void _signUp() { ¦ Hàm chạy khi bấm nút Sign Up
+    if (_formKey.currentState!.validate()) { ¦ Kiểm tra tất cả ô, đúng hết thì đi tiếp
+      Navigator.pushAndRemoveUntil( ¦ Mở trang mới và xóa các trang cũ phía sau
+        context, ¦ Vị trí hiện tại
+        MaterialPageRoute( ¦ Tạo trang mới
+          builder: (_) => HomeScreen(email: _emailController.text.trim()), ¦ Dựng HomeScreen, truyền email
+        ), ¦ Hết MaterialPageRoute
+        (route) => false, ¦ Điều kiện giữ lại trang cũ luôn là false, nên xóa hết. Bấm Back không quay về được
+      ); ¦ Hết pushAndRemoveUntil
+    } ¦ Hết if
+  } ¦ Hết _signUp
+
+  // Shared style for the text fields. ¦ Comment đầu hàm: kiểu ô nhập dùng chung
+  InputDecoration _inputStyle(String label, {Widget? suffix}) { ¦ Kiểu ô nhập dùng chung. suffix là widget tùy chọn ở cuối ô
+    return InputDecoration( ¦ Mô tả hình dáng ô
+      labelText: label, ¦ Nhãn nổi trong ô
+      labelStyle: const TextStyle(color: AppColors.textGray), ¦ Nhãn màu xám
+      suffixIcon: suffix, ¦ Widget cuối ô
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16), ¦ Đệm trong ô: ngang 14, dọc 16
+      border: OutlineInputBorder( ¦ Viền mặc định
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.border), ¦ Viền xám nhạt
+      ), ¦ Hết border
+      enabledBorder: OutlineInputBorder( ¦ Viền khi ô bình thường
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.border), ¦ Viền xám nhạt
+      ), ¦ Hết enabledBorder
+      focusedBorder: OutlineInputBorder( ¦ Viền khi đang bấm vào ô
+        borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+        borderSide: const BorderSide(color: AppColors.blue, width: 1.5), ¦ Viền xanh dày 1.5
+      ), ¦ Hết focusedBorder
+    ); ¦ Hết InputDecoration
+  } ¦ Hết _inputStyle
+
+  String? _required(String? value) { ¦ Hàm kiểm tra "bắt buộc nhập" dùng cho nhiều ô
+    if (value == null || value.trim().isEmpty) return 'Required'; ¦ Rỗng thì báo lỗi "Required"
+    return null; ¦ Có nhập thì hợp lệ
+  } ¦ Hết _required
+
+  // One selectable gender option. ¦ Comment đầu hàm: mỗi lần gọi vẽ một ô giới tính
+  Widget _genderBox(String text) { ¦ Hàm vẽ một ô chọn giới tính, text là tên giới tính
+    final selected = _gender == text; ¦ true nếu ô này đang được chọn
+    return Expanded( ¦ Mỗi ô chiếm phần ngang bằng nhau trong hàng
+      child: GestureDetector( ¦ Bắt thao tác bấm cho widget bất kỳ
+        onTap: () => setState(() => _gender = text), ¦ Bấm thì lưu giới tính mới và vẽ lại giao diện
+        child: Container( ¦ Hộp của ô chọn
+          height: 48, ¦ Cao 48
+          decoration: BoxDecoration( ¦ Trang trí hộp
+            borderRadius: BorderRadius.circular(8), ¦ Bo góc 8
+            border: Border.all( ¦ Viền bao quanh
+              color: selected ? AppColors.blue : AppColors.border, ¦ Đang chọn thì viền xanh, không thì xám
+              width: selected ? 1.5 : 1, ¦ Đang chọn thì viền dày hơn
+            ), ¦ Hết Border
+          ), ¦ Hết BoxDecoration
+          alignment: Alignment.center, ¦ Chữ nằm giữa ô
+          child: Text( ¦ Chữ trong ô
+            text, ¦ Tên giới tính
+            style: TextStyle( ¦ Kiểu chữ
+              fontSize: 14, ¦ Cỡ 14
+              color: selected ? AppColors.blue : AppColors.textDark, ¦ Đang chọn thì chữ xanh
+              fontWeight: selected ? FontWeight.bold : FontWeight.normal, ¦ Đang chọn thì in đậm
+            ), ¦ Hết TextStyle
+          ), ¦ Hết Text
+        ), ¦ Hết Container
+      ), ¦ Hết GestureDetector
+    ); ¦ Hết Expanded
+  } ¦ Hết _genderBox
+
+  @override ¦ Ghi đè hàm của class cha
+  Widget build(BuildContext context) { ¦ Dựng giao diện
+    return Scaffold( ¦ Bộ khung trang
+      backgroundColor: Colors.white, ¦ Nền trắng
+      appBar: AppBar( ¦ Thanh trên cùng, tự có nút mũi tên quay lại
+        backgroundColor: Colors.white, ¦ Nền trắng
+        elevation: 0, ¦ Bỏ bóng đổ
+        iconTheme: const IconThemeData(color: AppColors.textDark), ¦ Mũi tên quay lại màu đậm
+      ), ¦ Hết AppBar
+      body: SafeArea( ¦ Tránh tai thỏ và thanh hệ thống
+        child: SingleChildScrollView( ¦ Cho phép cuộn vì form khá dài
+          padding: const EdgeInsets.symmetric(horizontal: 24), ¦ Đệm hai bên 24
+          child: Form( ¦ Form gom các ô để kiểm tra
+            key: _formKey, ¦ Gắn chìa khóa
+            child: Column( ¦ Cột xếp dọc
+              crossAxisAlignment: CrossAxisAlignment.start, ¦ Căn các phần tử sát lề trái
+              children: [ ¦ Danh sách widget con
+                const Text( ¦ Tiêu đề lớn
+                  'Create a new account', ¦ Nội dung
+                  style: TextStyle( ¦ Kiểu chữ
+                    fontSize: 26, ¦ Cỡ 26
+                    fontWeight: FontWeight.bold, ¦ In đậm
+                    color: AppColors.textDark, ¦ Màu đậm
+                  ), ¦ Hết TextStyle
+                ), ¦ Hết Text
+                const SizedBox(height: 4), ¦ Khoảng trống nhỏ
+                const Text( ¦ Dòng phụ đề
+                  "It's quick and easy.", ¦ Nội dung (dùng nháy kép vì câu có dấu ')
+                  style: TextStyle(fontSize: 14, color: AppColors.textGray), ¦ Cỡ 14, màu xám
+                ), ¦ Hết Text
+                const SizedBox(height: 16), ¦ Khoảng trống
+                const Divider(color: AppColors.divider), ¦ Đường kẻ ngang
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                Row( ¦ Hàng ngang chứa First name và Surname
+                  crossAxisAlignment: CrossAxisAlignment.start, ¦ Căn trên, để chữ lỗi ở ô này không làm lệch ô kia
+                  children: [ ¦ Danh sách widget con
+                    Expanded( ¦ Ô First name chiếm nửa hàng
+                      child: TextFormField( ¦ Ô nhập
+                        controller: _firstNameController, ¦ Gắn controller
+                        decoration: _inputStyle('First name'), ¦ Dùng kiểu ô chung
+                        validator: _required, ¦ Bắt buộc nhập
+                      ), ¦ Hết ô
+                    ), ¦ Hết Expanded
+                    const SizedBox(width: 10), ¦ Khoảng cách ngang giữa hai ô
+                    Expanded( ¦ Ô Surname chiếm nửa còn lại
+                      child: TextFormField( ¦ Ô nhập
+                        controller: _surnameController, ¦ Gắn controller
+                        decoration: _inputStyle('Surname'), ¦ Dùng kiểu ô chung
+                        validator: _required, ¦ Bắt buộc nhập
+                      ), ¦ Hết ô
+                    ), ¦ Hết Expanded
+                  ], ¦ Hết children
+                ), ¦ Hết Row
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                TextFormField( ¦ Ô ngày sinh
+                  controller: _birthdayController, ¦ Gắn controller
+                  readOnly: true, ¦ Không cho gõ tay, chỉ chọn từ lịch
+                  onTap: _pickBirthday, ¦ Bấm vào ô thì mở lịch
+                  decoration: _inputStyle( ¦ Dùng kiểu ô chung kèm icon
+                    'Birthday', ¦ Nhãn
+                    suffix: const Icon( ¦ Icon ở cuối ô
+                      Icons.calendar_today_outlined, ¦ Hình cuốn lịch
+                      size: 20, ¦ Cỡ 20
+                      color: AppColors.textGray, ¦ Màu xám
+                    ), ¦ Hết Icon
+                  ), ¦ Hết _inputStyle
+                  validator: _required, ¦ Bắt buộc phải chọn ngày
+                ), ¦ Hết ô ngày sinh
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                const Text( ¦ Nhãn "Gender"
+                  'Gender', ¦ Nội dung
+                  style: TextStyle(fontSize: 13, color: AppColors.textGray), ¦ Cỡ 13, màu xám
+                ), ¦ Hết Text
+                const SizedBox(height: 8), ¦ Khoảng trống nhỏ
+                Row( ¦ Hàng 3 ô chọn giới tính
+                  children: [ ¦ Danh sách widget con
+                    _genderBox('Female'), ¦ Ô Female
+                    const SizedBox(width: 10), ¦ Khoảng cách
+                    _genderBox('Male'), ¦ Ô Male
+                    const SizedBox(width: 10), ¦ Khoảng cách
+                    _genderBox('Custom'), ¦ Ô Custom
+                  ], ¦ Hết children
+                ), ¦ Hết Row
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                TextFormField( ¦ Ô email / số điện thoại
+                  controller: _emailController, ¦ Gắn controller
+                  keyboardType: TextInputType.emailAddress, ¦ Bàn phím có phím @
+                  decoration: _inputStyle('Mobile number or email address'), ¦ Dùng kiểu ô chung
+                  validator: validateEmailOrPhone, ¦ Kiểm tra email hoặc số điện thoại
+                ), ¦ Hết ô
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                TextFormField( ¦ Ô mật khẩu mới
+                  controller: _passwordController, ¦ Gắn controller
+                  obscureText: _hidePassword, ¦ true thì che mật khẩu
+                  decoration: _inputStyle( ¦ Kiểu ô chung kèm nút ở cuối
+                    'New password', ¦ Nhãn
+                    suffix: TextButton( ¦ Nút Show/Hide
+                      onPressed: () { ¦ Chạy khi bấm
+                        setState(() => _hidePassword = !_hidePassword); ¦ Đảo trạng thái ẩn/hiện và vẽ lại
+                      }, ¦ Hết onPressed
+                      child: Text( ¦ Chữ trên nút
+                        _hidePassword ? 'Show' : 'Hide', ¦ Đang che thì hiện "Show"
+                        style: const TextStyle(color: AppColors.textGray), ¦ Màu xám
+                      ), ¦ Hết Text
+                    ), ¦ Hết TextButton
+                  ), ¦ Hết _inputStyle
+                  validator: (value) { ¦ Kiểm tra mật khẩu
+                    if (value == null || value.length < 6) { ¦ Rỗng hoặc ngắn hơn 6 ký tự
+                      return 'Password must be at least 6 characters'; ¦ Báo lỗi
+                    } ¦ Hết if
+                    return null; ¦ Hợp lệ
+                  }, ¦ Hết validator
+                ), ¦ Hết ô mật khẩu
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                const Text( ¦ Dòng điều khoản nhỏ
+                  'By tapping Sign Up, you agree to our Terms, Privacy ' ¦ Nửa đầu câu
+                  'Policy and Cookies Policy.', ¦ Nửa sau. Dart tự nối hai chuỗi đứng liền nhau thành một
+                  style: TextStyle(fontSize: 12, color: AppColors.textGray), ¦ Cỡ 12, màu xám
+                ), ¦ Hết Text
+                const SizedBox(height: 16), ¦ Khoảng trống
+
+                SizedBox( ¦ Ép kích thước cho nút
+                  width: double.infinity, ¦ Rộng hết cỡ
+                  height: 48, ¦ Cao 48
+                  child: ElevatedButton( ¦ Nút Sign Up
+                    onPressed: _signUp, ¦ Bấm thì chạy _signUp
+                    style: ElevatedButton.styleFrom( ¦ Tùy chỉnh kiểu nút
+                      backgroundColor: AppColors.blue, ¦ Nền xanh
+                      foregroundColor: Colors.white, ¦ Chữ trắng
+                      elevation: 0, ¦ Bỏ bóng đổ
+                      shape: RoundedRectangleBorder( ¦ Hình dạng nút
+                        borderRadius: BorderRadius.circular(24), ¦ Bo tròn
+                      ), ¦ Hết shape
+                    ), ¦ Hết styleFrom
+                    child: const Text( ¦ Chữ trên nút
+                      'Sign Up', ¦ Nội dung
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), ¦ Cỡ 16, in đậm
+                    ), ¦ Hết Text
+                  ), ¦ Hết ElevatedButton
+                ), ¦ Hết SizedBox
+                const SizedBox(height: 20), ¦ Khoảng trống
+
+                Center( ¦ Đặt nút giữa hàng
+                  child: TextButton( ¦ Nút chữ
+                    onPressed: () => Navigator.pop(context), ¦ pop đóng trang hiện tại, quay về Login
+                    child: const Text( ¦ Chữ trên nút
+                      'I already have an account', ¦ Nội dung
+                      style: TextStyle( ¦ Kiểu chữ
+                        fontSize: 15, ¦ Cỡ 15
+                        fontWeight: FontWeight.w600, ¦ Đậm vừa
+                        color: AppColors.blue, ¦ Màu xanh
+                      ), ¦ Hết TextStyle
+                    ), ¦ Hết Text
+                  ), ¦ Hết TextButton
+                ), ¦ Hết Center
+                const SizedBox(height: 16), ¦ Khoảng trống cuối trang
+              ], ¦ Hết children
+            ), ¦ Hết Column
+          ), ¦ Hết Form
+        ), ¦ Hết SingleChildScrollView
+      ), ¦ Hết SafeArea
+    ); ¦ Hết Scaffold
+  } ¦ Hết build
+} ¦ Hết class State
+</script>
+
+<script>
+  var ORDER = ['f-main', 'f-colors', 'f-validators', 'f-home', 'f-login', 'f-signup'];
+  var tabsEl = document.getElementById('tabs');
+  var introEl = document.getElementById('intro');
+  var tableEl = document.getElementById('table');
+
+  function parse(text) {
+    var lines = text.replace(/^\n/, '').replace(/\n$/, '').split('\n');
+    return lines.map(function (raw) {
+      var i = raw.indexOf(' ¦ ');
+      if (i === -1) return { code: raw.trim() === '' ? '' : raw, note: '' };
+      return { code: raw.slice(0, i), note: raw.slice(i + 3) };
+    });
+  }
+
+  function show(id) {
+    var src = document.getElementById(id);
+    var rows = parse(src.textContent);
+    Array.prototype.forEach.call(tabsEl.children, function (b) {
+      b.setAttribute('aria-selected', b.dataset.id === id ? 'true' : 'false');
+    });
+    introEl.innerHTML = '';
+    var strong = document.createElement('strong');
+    strong.textContent = src.dataset.path;
+    var p = document.createElement('p');
+    p.textContent = src.dataset.intro;
+    introEl.appendChild(strong);
+    introEl.appendChild(p);
+
+    tableEl.innerHTML = '';
+    rows.forEach(function (r, idx) {
+      var row = document.createElement('div');
+      row.className = 'row' + (r.code === '' ? ' blank' : '');
+      var n = document.createElement('div');
+      n.className = 'num';
+      n.textContent = idx + 1;
+      var c = document.createElement('div');
+      c.className = 'code';
+      c.textContent = r.code === '' ? ' ' : r.code;
+      var t = document.createElement('div');
+      t.className = 'note' + (r.note ? ' has' : '');
+      t.textContent = r.note;
+      row.appendChild(n);
+      row.appendChild(c);
+      row.appendChild(t);
+      tableEl.appendChild(row);
+    });
+  }
+
+  ORDER.forEach(function (id) {
+    var b = document.createElement('button');
+    b.className = 'tab';
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.dataset.id = id;
+    b.textContent = document.getElementById(id).dataset.name;
+    b.addEventListener('click', function () { show(id); });
+    tabsEl.appendChild(b);
+  });
+  show('f-main');
+</script>
