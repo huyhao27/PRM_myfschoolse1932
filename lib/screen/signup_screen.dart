@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
+import '../theme/tokens.dart';
 import '../models/user.dart';
 import 'home_screen.dart';
 import 'validators.dart';
@@ -62,20 +62,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   InputDecoration _inputStyle(String label, {Widget? suffix}) {
     return InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(color: AppColors.textGray),
+      labelStyle: const TextStyle(color: AppColors.muted),
       suffixIcon: suffix,
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppColors.border),
+        borderSide: const BorderSide(color: AppColors.control),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppColors.border),
+        borderSide: const BorderSide(color: AppColors.control),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppColors.blue, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.brandStrong, width: 1.5),
       ),
     );
   }
@@ -96,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: selected ? AppColors.blue : AppColors.border,
+              color: selected ? AppColors.brandStrong : AppColors.control,
               width: selected ? 1.5 : 1,
             ),
           ),
@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             text,
             style: TextStyle(
               fontSize: 14,
-              color: selected ? AppColors.blue : AppColors.textDark,
+              color: selected ? AppColors.brandStrong : AppColors.ink,
               fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             ),
           ),
@@ -121,7 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: AppColors.textDark),
+        iconTheme: const IconThemeData(color: AppColors.ink),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -136,16 +136,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textDark,
+                    color: AppColors.ink,
                   ),
                 ),
                 const SizedBox(height: 4),
                 const Text(
                   "It's quick and easy.",
-                  style: TextStyle(fontSize: 14, color: AppColors.textGray),
+                  style: TextStyle(fontSize: 14, color: AppColors.muted),
                 ),
                 const SizedBox(height: 16),
-                const Divider(color: AppColors.divider),
+                const Divider(color: AppColors.line),
                 const SizedBox(height: 16),
 
                 Row(
@@ -179,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     suffix: const Icon(
                       Icons.calendar_today_outlined,
                       size: 20,
-                      color: AppColors.textGray,
+                      color: AppColors.muted,
                     ),
                   ),
                   validator: _required,
@@ -188,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 const Text(
                   'Gender',
-                  style: TextStyle(fontSize: 13, color: AppColors.textGray),
+                  style: TextStyle(fontSize: 13, color: AppColors.muted),
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -221,7 +221,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: Text(
                         _hidePassword ? 'Show' : 'Hide',
-                        style: const TextStyle(color: AppColors.textGray),
+                        style: const TextStyle(color: AppColors.muted),
                       ),
                     ),
                   ),
@@ -237,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const Text(
                   'By tapping Sign Up, you agree to our Terms, Privacy '
                   'Policy and Cookies Policy.',
-                  style: TextStyle(fontSize: 12, color: AppColors.textGray),
+                  style: TextStyle(fontSize: 12, color: AppColors.muted),
                 ),
                 const SizedBox(height: 16),
 
@@ -247,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: ElevatedButton(
                     onPressed: _signUp,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.blue,
+                      backgroundColor: AppColors.brandStrong,
                       foregroundColor: Colors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -271,7 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.blue,
+                        color: AppColors.brandStrong,
                       ),
                     ),
                   ),

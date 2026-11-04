@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
-import 'app_colors.dart';
+import '../theme/app_theme.dart';
+import 'fpt_logo.dart';
 import 'home_screen.dart';
 import 'reset_password_screen.dart';
 import 'validators.dart';
+import 'widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.authService});
@@ -83,40 +85,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Shared style for the text fields (orange outline, rounded).
-  InputDecoration _inputStyle({Widget? suffix}) {
-    OutlineInputBorder border(Color color, [double width = 1]) =>
-        OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: color, width: width),
-        );
-    return InputDecoration(
-      suffixIcon: suffix,
-      filled: true,
-      fillColor: Colors.white,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
-      border: border(AppColors.border),
-      enabledBorder: border(AppColors.border),
-      focusedBorder: border(AppColors.orange, 1.5),
-      errorBorder: border(Colors.red),
-      focusedErrorBorder: border(Colors.red, 1.5),
-    );
-  }
-
   Widget _label(String text, {Widget? trailing}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: Space.sm - 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textDark,
-            ),
-          ),
+          Flexible(child: Text(text, style: context.text.labelLarge)),
           ?trailing,
         ],
       ),
@@ -126,12 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.surface,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppColors.peach, Colors.white],
+            colors: [AppColors.peach, AppColors.surface],
             stops: [0, 0.45],
           ),
         ),
@@ -143,63 +119,88 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Space.xl),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 28),
-                            const Text(
-                              'MyFSchool',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w800,
-                                color: AppColors.orange,
-                                letterSpacing: -0.5,
+                            const SizedBox(height: Space.xl),
+                            Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // White chip keeps the logo legible on the peach wash.
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: Space.lg,
+                                        vertical: Space.md),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.surface,
+                                      borderRadius:
+                                          BorderRadius.circular(Radii.sheet),
+                                      border:
+                                          Border.all(color: AppColors.line),
+                                    ),
+                                    child: const FptLogo(height: 44),
+                                  ),
+                                  const SizedBox(height: Space.md),
+                                  Text('MyFSchool',
+                                      style: context.text.headlineSmall
+                                          ?.copyWith(
+                                              color: AppColors.brandStrong,
+                                              fontWeight: FontWeight.w800)),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 28),
-                            const Text(
-                              'Chào mừng quý phụ huynh',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textDark,
-                              ),
+                            const SizedBox(height: Space.xl),
+                            Semantics(
+                              header: true,
+                              child: Text('Chào mừng quý phụ huynh',
+                                  style: context.text.titleLarge),
                             ),
-                            const SizedBox(height: 24),
-
-                            _label('Tài khoản'),
+                            const SizedBox(height: Space.xl),
+                            _label('Số điện thoại'),
                             TextFormField(
                               controller: _emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: _inputStyle(),
-                              validator: validateEmailOrPhone,
+                              keyboardType: TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+                              autofillHints: const [AutofillHints.username],
+                              decoration: const InputDecoration(
+                                hintText: '09xxxxxxxx',
+                                helperText:
+                                    'Số điện thoại đã đăng ký với nhà trường',
+                                prefixIcon: ExcludeSemantics(
+                                    child:
+                                        Icon(Icons.phone_outlined, size: 20)),
+                              ),
+                              validator: validatePhone,
                             ),
-                            const SizedBox(height: 16),
-
+                            const SizedBox(height: Space.md),
                             _label(
                               'Mật khẩu',
-                              trailing: GestureDetector(
-                                onTap: _loading ? null : _openResetPassword,
-                                child: const Text(
-                                  'Quên mật khẩu ?',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.orange,
-                                  ),
-                                ),
+                              trailing: TextButton(
+                                onPressed:
+                                    _loading ? null : _openResetPassword,
+                                style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: Space.sm)),
+                                child: const Text('Quên mật khẩu ?'),
                               ),
                             ),
                             TextFormField(
                               controller: _passwordController,
                               obscureText: _hidePassword,
                               textInputAction: TextInputAction.done,
+                              autofillHints: const [AutofillHints.password],
                               onFieldSubmitted: (_) => _logIn(),
-                              decoration: _inputStyle(
-                                suffix: IconButton(
+                              decoration: InputDecoration(
+                                helperText: 'Tối thiểu 6 ký tự',
+                                prefixIcon: const ExcludeSemantics(
+                                    child:
+                                        Icon(Icons.lock_outline, size: 20)),
+                                suffixIcon: IconButton(
                                   tooltip: _hidePassword
                                       ? 'Hiện mật khẩu'
                                       : 'Ẩn mật khẩu',
@@ -207,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     _hidePassword
                                         ? Icons.visibility_off_outlined
                                         : Icons.visibility_outlined,
-                                    color: AppColors.textGray,
+                                    color: AppColors.muted,
                                     size: 20,
                                   ),
                                   onPressed: () => setState(
@@ -221,66 +222,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return null;
                               },
                             ),
-                            const SizedBox(height: 8),
-
-                            InkWell(
-                              onTap: () =>
-                                  setState(() => _remember = !_remember),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 32,
-                                    height: 32,
-                                    child: Checkbox(
-                                      value: _remember,
-                                      activeColor: AppColors.orange,
-                                      onChanged: (v) => setState(
-                                          () => _remember = v ?? false),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 6),
-                                  const Text(
-                                    'Lưu thông tin đăng nhập',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: AppColors.textDark,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            const SizedBox(height: Space.sm),
+                            CheckboxListTile(
+                              value: _remember,
+                              onChanged: (v) =>
+                                  setState(() => _remember = v ?? false),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              title: Text('Lưu thông tin đăng nhập',
+                                  style: context.text.bodyMedium),
                             ),
-
                             if (_error != null) ...[
-                              const SizedBox(height: 8),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  _error!,
-                                  key: const Key('loginError'),
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      color: Colors.red, fontSize: 14),
-                                ),
-                              ),
+                              const SizedBox(height: Space.sm),
+                              InlineError(_error!,
+                                  textKey: const Key('loginError')),
                             ],
-                            const SizedBox(height: 16),
-
+                            const SizedBox(height: Space.lg),
                             SizedBox(
                               width: double.infinity,
-                              height: 48,
+                              height: Space.minTap,
                               child: ElevatedButton(
                                 onPressed: _loading ? null : _logIn,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.orange,
-                                  foregroundColor: Colors.white,
-                                  disabledBackgroundColor:
-                                      AppColors.orange.withValues(alpha: 0.7),
-                                  disabledForegroundColor: Colors.white,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
                                 child: _loading
                                     ? const SizedBox(
                                         width: 22,
@@ -289,75 +252,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                             strokeWidth: 2.5,
                                             color: Colors.white),
                                       )
-                                    : const Text(
-                                        'Đăng nhập',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                                    : const Text('Đăng nhập'),
                               ),
                             ),
-                            const SizedBox(height: 16),
-
-                            Row(
-                              children: const [
-                                Expanded(
-                                    child: Divider(color: AppColors.divider)),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 12),
-                                  child: Text(
-                                    'Hoặc đăng nhập bằng',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: AppColors.textGray),
-                                  ),
-                                ),
-                                Expanded(
-                                    child: Divider(color: AppColors.divider)),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-
-                            SizedBox(
-                              width: double.infinity,
-                              height: 48,
-                              child: TextButton(
-                                onPressed: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Đăng nhập bằng FEID chưa được hỗ trợ'),
-                                    ),
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: AppColors.orangeSoft,
-                                  foregroundColor: AppColors.orange,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'FEID',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: Space.xl),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 16),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: Space.lg),
                     child: Text(
                       'Phiên bản 1.0.0\nCopyright MyFSchool',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 11, color: AppColors.textGray),
+                      style: context.text.bodySmall,
                     ),
                   ),
                 ],

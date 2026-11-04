@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
-import 'app_colors.dart';
+import '../theme/app_theme.dart';
+import 'fpt_logo.dart';
 import 'validators.dart';
+import 'widgets.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key, this.authService});
@@ -19,6 +21,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final _passController = TextEditingController();
   final _confirmController = TextEditingController();
   bool _loading = false;
+  bool _hide = true;
   String? _error;
   late final AuthService _auth = widget.authService ?? AuthService();
 
@@ -60,97 +63,88 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     }
   }
 
-  InputDecoration _style(String label) {
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(color: AppColors.border),
-    );
-    return InputDecoration(
-      labelText: label,
-      labelStyle: const TextStyle(color: AppColors.textGray),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-      border: border,
-      enabledBorder: border,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppColors.orange, width: 1.5),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: AppColors.textDark,
-        elevation: 0,
-        title: const Text('Reset password'),
-      ),
+      appBar: AppBar(title: const Text('Reset password')),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _idController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: _style('Mobile number or email address'),
-                  validator: validateEmailOrPhone,
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: _passController,
-                  obscureText: true,
-                  decoration: _style('New password'),
-                  validator: (v) => (v == null || v.length < 6)
-                      ? 'Password must be at least 6 characters'
-                      : null,
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: _confirmController,
-                  obscureText: true,
-                  decoration: _style('Confirm new password'),
-                  validator: (v) => v != _passController.text
-                      ? 'Passwords do not match'
-                      : null,
-                ),
-                if (_error != null) ...[
-                  const SizedBox(height: 12),
-                  Text(_error!,
-                      key: const Key('resetError'),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.red)),
-                ],
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: _loading ? null : _submit,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.orange,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24)),
+        child: PageBody(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(Space.xl),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Center(child: FptLogo(height: 32)),
+                  const SizedBox(height: Space.xl),
+                  TextFormField(
+                    controller: _idController,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                    decoration: const InputDecoration(
+                      labelText: 'Số điện thoại',
+                      helperText: 'Số điện thoại đã đăng ký',
                     ),
-                    child: _loading
-                        ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2.5, color: Colors.white))
-                        : const Text('Reset password',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
+                    validator: validatePhone,
                   ),
-                ),
-              ],
+                  const SizedBox(height: Space.md),
+                  TextFormField(
+                    controller: _passController,
+                    obscureText: _hide,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'New password',
+                      helperText: 'At least 6 characters',
+                      suffixIcon: IconButton(
+                        tooltip: _hide ? 'Hiện mật khẩu' : 'Ẩn mật khẩu',
+                        icon: Icon(
+                            _hide
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            size: 20,
+                            color: AppColors.muted),
+                        onPressed: () => setState(() => _hide = !_hide),
+                      ),
+                    ),
+                    validator: (v) => (v == null || v.length < 6)
+                        ? 'Password must be at least 6 characters'
+                        : null,
+                  ),
+                  const SizedBox(height: Space.md),
+                  TextFormField(
+                    controller: _confirmController,
+                    obscureText: _hide,
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) => _submit(),
+                    decoration: const InputDecoration(
+                      labelText: 'Confirm new password',
+                      helperText: 'Type the same password again',
+                    ),
+                    validator: (v) => v != _passController.text
+                        ? 'Passwords do not match'
+                        : null,
+                  ),
+                  if (_error != null) ...[
+                    const SizedBox(height: Space.md),
+                    InlineError(_error!, textKey: const Key('resetError')),
+                  ],
+                  const SizedBox(height: Space.lg),
+                  SizedBox(
+                    height: Space.minTap,
+                    child: ElevatedButton(
+                      onPressed: _loading ? null : _submit,
+                      child: _loading
+                          ? const SizedBox(
+                              width: 22,
+                              height: 22,
+                              child: CircularProgressIndicator(
+                                  strokeWidth: 2.5, color: Colors.white))
+                          : const Text('Reset password'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

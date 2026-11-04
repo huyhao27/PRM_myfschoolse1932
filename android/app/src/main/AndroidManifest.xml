@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- The dev API is plain http (http://10.0.2.2:3000 on the emulator); Android 9+ blocks cleartext by default. -->
     <application
+        android:usesCleartextTraffic="true"
         android:label="myfschoolse1932"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

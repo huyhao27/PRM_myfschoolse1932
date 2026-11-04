@@ -14,7 +14,16 @@ Nhấp đúp `start.bat` (hoặc chạy nó trong terminal ở thư mục này).
 
 Chạy lại bao nhiêu lần cũng được. Chỉ cần dựng database và backend, không mở app: `powershell -ExecutionPolicy Bypass -File scripts\setup-backend.ps1`, rồi `cd backend` và `npm start`.
 
-Tài khoản mẫu (mật khẩu `123456`): `gv@fschool.vn`, `manager@fschool.vn`, `ph@fschool.vn` (có thể đăng nhập bằng SĐT `0901234567`), `hs@fschool.vn`.
+Tài khoản mẫu (mật khẩu `123456`). App đăng nhập bằng **số điện thoại** (API vẫn nhận cả email):
+
+| Vai trò | Email | SĐT |
+|---|---|---|
+| GV | gv@fschool.vn | 0901000001 |
+| Manager | manager@fschool.vn | 0901000002 |
+| PH | ph@fschool.vn | 0901234567 |
+| HS | hs@fschool.vn | 0901000003 |
+| HS | hs2@fschool.vn | 0901000004 |
+| GV | gv2@fschool.vn | 0901000005 |
 
 ## Chạy trên thiết bị khác
 
@@ -24,7 +33,7 @@ Tài khoản mẫu (mật khẩu `123456`): `gv@fschool.vn`, `manager@fschool.vn
 ## Kiểm tra
 
 ```
-cd backend && npm test      # 36 test API trên database thật
+cd backend && npm test      # 62 test API trên database thật
 flutter analyze && flutter test
 ```
 

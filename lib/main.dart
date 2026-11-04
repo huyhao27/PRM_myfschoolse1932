@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screen/app_colors.dart';
 import 'screen/login_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyFSchool',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.orange),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
       home: const LoginScreen(),
     );
   }
