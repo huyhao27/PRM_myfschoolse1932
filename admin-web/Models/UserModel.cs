@@ -9,6 +9,22 @@ namespace MyfschoolWeb.Models
         public const string Teacher = "GV";
         public const string Parent = "PH";
         public const string Student = "HS";
+
+        /// <summary>
+        /// THE visibility rule, used by the web portal and the mobile API: SQL condition "student alias is visible to @uid".
+        /// HS: themself. PH: linked children (ParentStudent). GV: students of the classes in their timetable. Manager: every student.
+        /// </summary>
+        public static string StudentScope(string role, string alias)
+        {
+            switch (role)
+            {
+                case Student: return alias + ".id = @uid";
+                case Parent: return alias + ".id IN (SELECT studentId FROM dbo.ParentStudent WHERE parentId = @uid)";
+                case Teacher: return alias + ".role = 'HS' AND " + alias + ".className IN (SELECT className FROM dbo.Schedule WHERE teacherId = @uid)";
+                case Manager: return alias + ".role = 'HS'";
+                default: return "1 = 0";
+            }
+        }
     }
 
     /// <summary>

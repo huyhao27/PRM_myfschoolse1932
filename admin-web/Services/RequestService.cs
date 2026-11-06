@@ -69,14 +69,10 @@ namespace MyfschoolWeb.Services
             };
         }
 
-        /// <summary>SQL condition "student alias is visible to @uid" (mirrors AccessDao.studentScope). Null when the role has no access.</summary>
+        /// <summary>Visibility condition (Roles.StudentScope) for a portal user; null for roles the portal does not serve.</summary>
         public static string StudentScope(UserModel actor, string alias)
         {
-            if (actor == null) return null;
-            if (actor.IsManager) return alias + ".role = 'HS'";
-            if (actor.IsTeacher)
-                return alias + ".role = 'HS' AND " + alias + ".className IN (SELECT className FROM dbo.Schedule WHERE teacherId = @uid)";
-            return null;
+            return actor != null && (actor.IsManager || actor.IsTeacher) ? Roles.StudentScope(actor.Role, alias) : null;
         }
 
         public static string StatusText(string status)

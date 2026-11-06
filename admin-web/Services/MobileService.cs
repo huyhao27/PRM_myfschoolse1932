@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MyfschoolWeb.DataAccess;
+using MyfschoolWeb.Models;
 using Newtonsoft.Json.Linq;
 
 namespace MyfschoolWeb.Services
@@ -168,24 +169,11 @@ namespace MyfschoolWeb.Services
             return true;
         }
 
-        // ------------------------------------------------------------ access (AccessDao)
-
-        /// <summary>SQL condition on a Users row (alias) saying "this student is visible to @uid".</summary>
-        public static string StudentScope(string role, string alias)
-        {
-            switch (role)
-            {
-                case "HS": return alias + ".id = @uid";
-                case "PH": return alias + ".id IN (SELECT studentId FROM dbo.ParentStudent WHERE parentId = @uid)";
-                case "GV": return alias + ".role = 'HS' AND " + alias + ".className IN (SELECT className FROM dbo.Schedule WHERE teacherId = @uid)";
-                case "Manager": return alias + ".role = 'HS'";
-                default: return "1 = 0";
-            }
-        }
+        // ------------------------------------------------------------ access (rule: Roles.StudentScope)
 
         public List<MobileStudent> VisibleStudents(MobileUser user)
         {
-            return SqlDb.Query("SELECT s.id, s.name, s.className FROM dbo.Users s WHERE " + StudentScope(user.Role, "s") + " ORDER BY s.name",
+            return SqlDb.Query("SELECT s.id, s.name, s.className FROM dbo.Users s WHERE " + Roles.StudentScope(user.Role, "s") + " ORDER BY s.name",
                 r => new MobileStudent { Id = SqlDb.Int(r, "id"), Name = SqlDb.Str(r, "name"), ClassName = SqlDb.Str(r, "className") },
                 SqlDb.P("@uid", user.Id));
         }
@@ -397,7 +385,7 @@ namespace MyfschoolWeb.Services
 
         public List<object> RequestList(MobileUser user, string status)
         {
-            string where = StudentScope(user.Role, "s");
+            string where = Roles.StudentScope(user.Role, "s");
             var ps = new List<SqlParameter> { SqlDb.P("@uid", user.Id) };
             if (status != null) { where += " AND r.status = @status"; ps.Add(SqlDb.P("@status", status)); }
             return Rows(ReqSelect + " WHERE " + where + " ORDER BY r.createdAt DESC, r.id DESC", ps.ToArray()).Select(Shape).ToList();
@@ -405,7 +393,7 @@ namespace MyfschoolWeb.Services
 
         private JObject FindVisibleRow(MobileUser user, int id)
         {
-            return Rows(ReqSelect + " WHERE r.id = @id AND " + StudentScope(user.Role, "s"), SqlDb.P("@id", id), SqlDb.P("@uid", user.Id)).FirstOrDefault();
+            return Rows(ReqSelect + " WHERE r.id = @id AND " + Roles.StudentScope(user.Role, "s"), SqlDb.P("@id", id), SqlDb.P("@uid", user.Id)).FirstOrDefault();
         }
 
         public object RequestDetail(MobileUser user, int id)
@@ -418,7 +406,7 @@ namespace MyfschoolWeb.Services
         public bool StudentVisible(MobileUser user, long studentId)
         {
             if (studentId > int.MaxValue) return false;
-            return SqlDb.Query("SELECT s.id FROM dbo.Users s WHERE s.id = @sid AND " + StudentScope(user.Role, "s"), r => 1,
+            return SqlDb.Query("SELECT s.id FROM dbo.Users s WHERE s.id = @sid AND " + Roles.StudentScope(user.Role, "s"), r => 1,
                 SqlDb.P("@sid", (int)studentId), SqlDb.P("@uid", user.Id)).Count > 0;
         }
 

@@ -311,16 +311,6 @@ namespace MyfschoolWeb.Services
 
         // ------------------------------------------------------------------ grades (simple bulk import)
 
-        private static int DefaultWeight(string type)
-        {
-            switch ((type ?? "").Trim().ToLowerInvariant())
-            {
-                case "1 tiết": case "giữa kỳ": return 2;
-                case "cuối kỳ": return 3;
-                default: return 1;
-            }
-        }
-
         /// <summary>Columns: student (HS phone/email), subject, term, type (Miệng, 15 phút, 1 tiết, Giữa kỳ, Cuối kỳ), score 0-10, weight (optional), gradeDate (yyyy-MM-dd or dd/MM/yyyy, optional).</summary>
         public ImportResultModel ImportGradesFromCsv(UserModel actor, string csvContent)
         {
@@ -360,7 +350,7 @@ namespace MyfschoolWeb.Services
             decimal score;
             if (!decimal.TryParse(scoreText.Replace(',', '.'), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out score) || score < 0 || score > 10)
                 return "Điểm phải là số từ 0 đến 10.";
-            int weight = DefaultWeight(type);
+            int weight = GradeService.WeightOf(GradeService.NormalizeType(type));
             if (weightText != null && (!int.TryParse(weightText, out weight) || weight < 1 || weight > 5)) return "Hệ số phải từ 1 đến 5.";
             DateTime? date = null;
             if (dateText != null)
