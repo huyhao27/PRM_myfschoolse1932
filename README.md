@@ -6,7 +6,7 @@ Flutter app + web service C# (`admin-web`) + SQL Server.
 app Flutter -> web service C# (admin-web, /api/m, JWT bearer) -> SQL Server
 ```
 
-Các trang Web Forms của portal dùng chung các service với web service này. API Node (`backend/`) là bản cũ: giữ lại để chạy `npm run db:init` (tạo bảng + dữ liệu mẫu) và làm chuẩn đối chiếu hợp đồng JSON, app không còn gọi nó.
+Các trang Web Forms của portal dùng chung các service với web service này. Backend duy nhất là C#. Thư mục `backend/` (Node) chỉ là công cụ: `npm run db:init` tạo bảng + dữ liệu mẫu, `npm test` chạy 68 test hợp đồng vào `/api/m` của C#.
 
 ## Chạy nhanh
 
@@ -16,9 +16,9 @@ Nhấp đúp `start.bat` (hoặc chạy nó trong terminal ở thư mục này).
 2. Tạo `backend/.env` với mật khẩu và JWT secret ngẫu nhiên nếu chưa có.
 3. Tạo database `FSchoolDB` và tài khoản kết nối nếu chưa có.
 4. Cài thư viện, tạo bảng, nạp tài khoản mẫu.
-5. Bật portal C# ở `http://localhost:8088` (chạy nền, `admin-web	oolsun.ps1`; dừng bằng `admin-web	ools\stop.ps1`), chờ `/api/m/health` trả lời, rồi chạy app Flutter trên Chrome.
+5. Bật portal C# ở `http://localhost:8088` (chạy nền, `admin-web\tools\run.ps1`; dừng bằng `admin-web\tools\stop.ps1`), chờ `/api/m/health` trả lời, rồi chạy app Flutter trên Chrome.
 
-Chạy lại bao nhiêu lần cũng được. Chỉ cần dựng database và portal, không mở app: `powershell -ExecutionPolicy Bypass -File scripts\setup-backend.ps1`, rồi `powershell -ExecutionPolicy Bypass -File admin-web	oolsun.ps1`.
+Chạy lại bao nhiêu lần cũng được. Chỉ cần dựng database và portal, không mở app: `powershell -ExecutionPolicy Bypass -File scripts\setup-backend.ps1`, rồi `powershell -ExecutionPolicy Bypass -File admin-web\tools\run.ps1`.
 
 Tài khoản mẫu (mật khẩu `123456`). App chỉ nhận **số điện thoại** để đăng nhập (API vẫn nhận cả email):
 
@@ -40,8 +40,8 @@ Tài khoản mẫu (mật khẩu `123456`). App chỉ nhận **số điện tho�
 ## Kiểm tra
 
 ```
-cd backend && npm test      # 62 test hợp đồng JSON của API Node (chuẩn đối chiếu)
+cd backend && npm test      # 68 test hợp đồng JSON vào /api/m của C# (portal phải đang chạy)
 flutter analyze && flutter test
 ```
 
-Chi tiết hợp đồng API (bản Node), lỗi thường gặp và cách đổi database: xem `backend/README.md`.
+Công cụ database và bộ test hợp đồng: xem `backend/README.md`.

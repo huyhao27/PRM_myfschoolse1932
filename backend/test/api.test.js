@@ -3,37 +3,14 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const jwt = require('jsonwebtoken');
 
-// Default: start the in-process Express app. With API_BASE set (e.g. http://localhost:8088) the same tests run against
-// another server (the C# portal) and API_PREFIX (default /api, C# uses /api/m) replaces the /api prefix of every path.
-const API_BASE = process.env.API_BASE;
-const API_PREFIX = process.env.API_PREFIX || '/api';
-let app = null;
-let closePool = async () => {};
-if (API_BASE) {
-  require('dotenv').config({ path: path.join(__dirname, '..', '.env') }); // JWT_SECRET for forged tokens
-} else {
-  app = require('../server');
-  ({ closePool } = require('../db'));
-}
+// Contract tests of the mobile JSON API served by the C# portal (admin-web must be running).
+// Override the target with API_BASE / API_PREFIX. Paths below are written as /api/... and get API_PREFIX instead.
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') }); // JWT_SECRET for forged tokens + DB for cleanup
+const base = (process.env.API_BASE || 'http://localhost:8088').replace(/\/+$/, '');
+const API_PREFIX = process.env.API_PREFIX || '/api/m';
+const { closePool } = require('../db');
 
-let server;
-let base;
-
-before(async () => {
-  if (API_BASE) {
-    base = API_BASE.replace(/\/+$/, '');
-    return;
-  }
-  await new Promise((resolve) => {
-    server = app.listen(0, '127.0.0.1', resolve);
-  });
-  base = `http://127.0.0.1:${server.address().port}`;
-});
-
-after(async () => {
-  if (server) await new Promise((r) => server.close(r));
-  await closePool();
-});
+after(() => closePool());
 
 async function call(method, path, { body, raw, headers } = {}) {
   const res = await fetch(base + path.replace(/^\/api/, API_PREFIX), {

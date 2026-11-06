@@ -1,13 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "FSchoolDB setup (npm run db:init) and contract tests of the C# mobile API (npm test)",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "start": "node server.js",
     "db:init": "node sql/init.js",
     "test": "node --test \"test/*.test.js\""
   },
@@ -16,9 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "cors": "^2.8.6",
     "dotenv": "^18.0.8",
-    "express": "^5.3.0",
     "jsonwebtoken": "^9.0.3",
     "mssql": "^12.7.7"
   },
