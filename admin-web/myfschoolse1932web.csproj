@@ -259,6 +259,12 @@ et48\BCrypt.Net-Next.dll</HintPath>
     <Compile Include="Controllers\Api\StudentsApiController.cs" />
     <Compile Include="Controllers\Api\SchedulesApiController.cs" />
     <Compile Include="Controllers\Api\ImportApiController.cs" />
+    <Compile Include="Services\MobileJwt.cs" />
+    <Compile Include="Services\MobileRateLimiter.cs" />
+    <Compile Include="Services\MobileService.cs" />
+    <Compile Include="Controllers\Api\Mobile\MobileApiController.cs" />
+    <Compile Include="Controllers\Api\Mobile\MobileEndpoints.cs" />
+    <Compile Include="Controllers\Api\Mobile\MobileEdge.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>

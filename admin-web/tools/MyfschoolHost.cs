@@ -92,7 +92,8 @@ public class ListenerWorkerRequest : HttpWorkerRequest
     {
         _ctx = ctx;
         _root = root;
-        string p = ctx.Request.Url.AbsolutePath;
+        // LocalPath is percent-decoded (what IIS hands to ASP.NET); AbsolutePath keeps %xx and ASP.NET would reject the "%".
+        string p = ctx.Request.Url.LocalPath;
         if (p == "/" || p == "") p = "/Default.aspx";
         _path = p;
         string q = ctx.Request.Url.Query;

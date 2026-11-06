@@ -23,7 +23,9 @@ namespace MyfschoolWeb.Controllers.Api
             {
                 var ctx = ((HttpApplication)s).Context;
                 string path = ctx.Request.AppRelativeCurrentExecutionFilePath ?? "";
-                if (path.StartsWith("~/api/", StringComparison.OrdinalIgnoreCase))
+                if (Mobile.MobileEdge.IsMobileAppRelativePath(path))
+                    ctx.SetSessionStateBehavior(SessionStateBehavior.Disabled);   // /api/m is stateless: bearer token, no session cookie
+                else if (path.StartsWith("~/api/", StringComparison.OrdinalIgnoreCase))
                     ctx.SetSessionStateBehavior(SessionStateBehavior.Required);
             };
         }

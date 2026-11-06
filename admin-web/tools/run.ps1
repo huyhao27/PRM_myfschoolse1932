@@ -7,7 +7,7 @@ $pidFile = Join-Path $PSScriptRoot 'site.pid'
 $log = Join-Path $PSScriptRoot 'site.log'
 
 & (Join-Path $PSScriptRoot 'stop.ps1') -Quiet
-if (-not (Test-Path "$root\connections.config")) { & (Join-Path $PSScriptRoot 'gen-connection.ps1') }
+if (-not (Test-Path "$root\connections.config") -or -not (Test-Path "$root\secrets.config")) { & (Join-Path $PSScriptRoot 'gen-connection.ps1') }
 if (-not $NoBuild) { & (Join-Path $PSScriptRoot 'build.ps1'); if ($LASTEXITCODE -ne 0) { exit 1 } }
 if (-not (Test-Path "$root\bin\MyfschoolHost.exe")) { Write-Error "bin\MyfschoolHost.exe missing - run tools\build.ps1"; exit 1 }
 
