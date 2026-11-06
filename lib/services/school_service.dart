@@ -1,5 +1,6 @@
 import '../models/school.dart';
 import 'api_client.dart';
+import 'api_config.dart';
 
 /// All calls for schedule, grades, requests and clubs. Pass a custom
 /// [ApiClient] (with a fake http client) in tests.
@@ -17,12 +18,12 @@ class SchoolService {
   }
 
   Future<List<Student>> children() async => [
-        for (final x in await _api.getList('/api/children'))
+        for (final x in await _api.getList(ApiConfig.path('/children')))
           Student.fromJson(Map<String, dynamic>.from(x as Map))
       ];
 
   Future<List<Lesson>> schedule({int? studentId}) async {
-    final data = await _api.getMap('/api/schedule',
+    final data = await _api.getMap(ApiConfig.path('/schedule'),
         query: _q({'studentId': studentId?.toString()}));
     return [
       for (final x in (data['items'] as List? ?? []))
@@ -31,16 +32,16 @@ class SchoolService {
   }
 
   Future<GradeSummary> grades({int? studentId}) async => GradeSummary.fromJson(
-      await _api.getMap('/api/grades',
+      await _api.getMap(ApiConfig.path('/grades'),
           query: _q({'studentId': studentId?.toString()})));
 
   Future<GradeDetail> gradeDetail(String subject, {int? studentId}) async =>
       GradeDetail.fromJson(await _api.getMap(
-          '/api/grades/${Uri.encodeComponent(subject)}',
+          ApiConfig.path('/grades/${Uri.encodeComponent(subject)}'),
           query: _q({'studentId': studentId?.toString()})));
 
   Future<List<RequestItem>> requests() async => [
-        for (final x in await _api.getList('/api/requests'))
+        for (final x in await _api.getList(ApiConfig.path('/requests')))
           RequestItem.fromJson(Map<String, dynamic>.from(x as Map))
       ];
 
@@ -51,7 +52,7 @@ class SchoolService {
     String? toDate,
     required String reason,
   }) async =>
-      RequestItem.fromJson(await _api.post('/api/requests', {
+      RequestItem.fromJson(await _api.post(ApiConfig.path('/requests'), {
         'studentId': studentId,
         'type': type,
         'fromDate': fromDate,
@@ -60,19 +61,19 @@ class SchoolService {
       }, auth: true));
 
   Future<RequestItem> decide(int id, String decision, String comment) async =>
-      RequestItem.fromJson(await _api.post('/api/requests/$id/decision',
+      RequestItem.fromJson(await _api.post(ApiConfig.path('/requests/$id/decision'),
           {'decision': decision, 'comment': comment},
           auth: true));
 
   Future<List<ClubItem>> clubs() async => [
-        for (final x in await _api.getList('/api/clubs'))
+        for (final x in await _api.getList(ApiConfig.path('/clubs')))
           ClubItem.fromJson(Map<String, dynamic>.from(x as Map))
       ];
 
   Future<ClubDetail> club(int id) async =>
-      ClubDetail.fromJson(await _api.getMap('/api/clubs/$id'));
+      ClubDetail.fromJson(await _api.getMap(ApiConfig.path('/clubs/$id')));
 
   Future<void> joinClub(int id) async {
-    await _api.post('/api/clubs/$id/join', {}, auth: true);
+    await _api.post(ApiConfig.path('/clubs/$id/join'), {}, auth: true);
   }
 }

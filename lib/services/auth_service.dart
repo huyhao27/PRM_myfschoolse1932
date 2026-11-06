@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/user.dart';
 import 'api_client.dart';
+import 'api_config.dart';
 
 export 'api_client.dart' show AuthException, Session;
 
@@ -14,7 +15,7 @@ class AuthService {
   static const _serverMsg = 'Server error. Please try again later.';
 
   Future<User> login(String identifier, String password) async {
-    final data = await _api.post('/api/login', {
+    final data = await _api.post(ApiConfig.path('/login'), {
       'identifier': identifier,
       'password': password,
     });
@@ -30,7 +31,7 @@ class AuthService {
   }
 
   Future<String> resetPassword(String identifier, String newPassword) async {
-    final data = await _api.post('/api/reset-password', {
+    final data = await _api.post(ApiConfig.path('/reset-password'), {
       'identifier': identifier,
       'newPassword': newPassword,
     });

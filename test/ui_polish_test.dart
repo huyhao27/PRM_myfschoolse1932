@@ -11,6 +11,7 @@ import 'package:myfschoolse1932/screen/login_screen.dart';
 import 'package:myfschoolse1932/screen/request_list_screen.dart';
 import 'package:myfschoolse1932/screen/schedule_screen.dart';
 import 'package:myfschoolse1932/screen/widgets.dart';
+import 'package:myfschoolse1932/services/api_config.dart';
 import 'package:myfschoolse1932/services/api_client.dart';
 import 'package:myfschoolse1932/services/school_service.dart';
 import 'package:myfschoolse1932/theme/app_theme.dart';
@@ -189,7 +190,7 @@ void main() {
 
   group('Schedule today highlight', () {
     final svc = fakeService({
-      'GET /api/schedule': {
+      'GET ${ApiConfig.prefix}/schedule': {
         'className': '10A1',
         'items': [_lesson(3, 1, 'Anh'), _lesson(1, 1, 'Toán')],
       },
@@ -308,7 +309,7 @@ void main() {
     testWidgets('request list with cards and filters', (t) async {
       await phone(t);
       final svc = fakeService({
-        'GET /api/requests': [
+        'GET ${ApiConfig.prefix}/requests': [
           {
             'id': 1,
             'type': 'Xin nghỉ học',
@@ -334,7 +335,7 @@ void main() {
       await phone(t);
       await t.pumpWidget(scaled(RequestListScreen(
           user: User(id: 1, name: 'A', email: '', phone: '', role: 'HS'),
-          service: fakeService({'GET /api/requests': <Object>[]}))));
+          service: fakeService({'GET ${ApiConfig.prefix}/requests': <Object>[]}))));
       await t.pumpAndSettle();
       expect(t.takeException(), isNull);
       expect(find.text('Chưa có đơn nào'), findsOneWidget);

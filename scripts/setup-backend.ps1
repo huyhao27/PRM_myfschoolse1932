@@ -1,4 +1,6 @@
-# Prepares everything the backend needs. Safe to run any number of times.
+# Prepares the database for the C# web service (admin-web). Node is used here ONLY as a DB tool
+# (backend/ holds the schema + seed script `npm run db:init`); the Node API itself is not started.
+# Prepares everything the database needs. Safe to run any number of times.
 #   1. checks Node and SQL Server
 #   2. creates backend/.env (random password + JWT secret) if missing
 #   3. starts the SQL Server service (asks for admin once) and sets it to start with Windows
@@ -106,4 +108,4 @@ try {
 }
 
 Write-Host ''
-Write-Host 'Backend is ready. Demo accounts (password 123456, app logs in by phone): gv 0901000001, manager 0901000002, ph 0901234567, hs 0901000003' -ForegroundColor Green
+Write-Host 'Database is ready. Demo accounts (password 123456, app logs in by phone): gv 0901000001, manager 0901000002, ph 0901234567, hs 0901000003' -ForegroundColor Green

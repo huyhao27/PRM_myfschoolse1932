@@ -11,6 +11,7 @@ import 'package:myfschoolse1932/screen/grade_screen.dart';
 import 'package:myfschoolse1932/screen/home_screen.dart';
 import 'package:myfschoolse1932/screen/request_list_screen.dart';
 import 'package:myfschoolse1932/screen/schedule_screen.dart';
+import 'package:myfschoolse1932/services/api_config.dart';
 import 'package:myfschoolse1932/services/api_client.dart';
 import 'package:myfschoolse1932/services/school_service.dart';
 import 'package:myfschoolse1932/theme/app_theme.dart';
@@ -95,7 +96,7 @@ void main() {
 
   group('ScheduleScreen', () {
     final routes = <String, Object>{
-      'GET /api/schedule': {
+      'GET ${ApiConfig.prefix}/schedule': {
         'className': '10A1',
         'items': [
           lesson(3, 1, 'Anh', note: 'Kiểm tra 15 phút'),
@@ -148,7 +149,7 @@ void main() {
     testWidgets('parent with two children can switch student', (t) async {
       final f = Fake({
         ...routes,
-        'GET /api/children': [student, student2],
+        'GET ${ApiConfig.prefix}/children': [student, student2],
       });
       await t.pumpWidget(app(
           ScheduleScreen(user: user('PH'), service: f.service, clock: clock)));
@@ -185,7 +186,7 @@ void main() {
 
   group('GradeScreen', () {
     final routes = <String, Object>{
-      'GET /api/grades': {
+      'GET ${ApiConfig.prefix}/grades': {
         'student': student,
         'term': 'HK1',
         'average': 8.42,
@@ -196,7 +197,7 @@ void main() {
           {'subject': 'Văn', 'midterm': 7.5, 'final': 8, 'average': 7.8},
         ],
       },
-      'GET /api/grades/To%C3%A1n': {
+      'GET ${ApiConfig.prefix}/grades/To%C3%A1n': {
         'student': student,
         'term': 'HK1',
         'subject': 'Toán',
@@ -231,7 +232,7 @@ void main() {
 
     testWidgets('no grades shows an empty message', (t) async {
       final f = Fake({
-        'GET /api/grades': {
+        'GET ${ApiConfig.prefix}/grades': {
           'student': student,
           'term': 'HK1',
           'average': null,
@@ -256,7 +257,7 @@ void main() {
 
     testWidgets('list, status filter and date text', (t) async {
       await t.pumpWidget(app(RequestListScreen(
-          user: user('PH'), service: Fake({'GET /api/requests': list}).service)));
+          user: user('PH'), service: Fake({'GET ${ApiConfig.prefix}/requests': list}).service)));
       await t.pumpAndSettle();
       expect(find.text('Xin nghỉ học'), findsNWidgets(2));
       expect(find.text('Nghỉ 15/10 - 16/10/2026'), findsNWidgets(2));
@@ -268,7 +269,7 @@ void main() {
     });
 
     testWidgets('only PH and HS get the add button', (t) async {
-      final svc = Fake({'GET /api/requests': list}).service;
+      final svc = Fake({'GET ${ApiConfig.prefix}/requests': list}).service;
       await t.pumpWidget(
           app(RequestListScreen(user: user('GV'), service: svc)));
       await t.pumpAndSettle();
@@ -281,8 +282,8 @@ void main() {
 
     testWidgets('teacher approves a pending request', (t) async {
       final f = Fake({
-        'GET /api/requests': list,
-        'POST /api/requests/1/decision': req(1, 'approved'),
+        'GET ${ApiConfig.prefix}/requests': list,
+        'POST ${ApiConfig.prefix}/requests/1/decision': req(1, 'approved'),
       });
       await t.pumpWidget(
           app(RequestListScreen(user: user('GV'), service: f.service)));
@@ -300,8 +301,8 @@ void main() {
 
     testWidgets('decision error is shown and the screen stays', (t) async {
       final f = Fake({
-        'GET /api/requests': list,
-        'POST /api/requests/1/decision':
+        'GET ${ApiConfig.prefix}/requests': list,
+        'POST ${ApiConfig.prefix}/requests/1/decision':
             json(409, {'message': 'Request was already handled'}),
       });
       await t.pumpWidget(
@@ -318,7 +319,7 @@ void main() {
     testWidgets('decided request shows the teacher comment, no buttons',
         (t) async {
       await t.pumpWidget(app(RequestListScreen(
-          user: user('GV'), service: Fake({'GET /api/requests': list}).service)));
+          user: user('GV'), service: Fake({'GET ${ApiConfig.prefix}/requests': list}).service)));
       await t.pumpAndSettle();
       await t.tap(find.text('Đã duyệt').last);
       await t.pumpAndSettle();
@@ -330,9 +331,9 @@ void main() {
     testWidgets('create: reason is required, then it posts and returns',
         (t) async {
       final f = Fake({
-        'GET /api/requests': list,
-        'GET /api/children': [student],
-        'POST /api/requests': req(9, 'pending'),
+        'GET ${ApiConfig.prefix}/requests': list,
+        'GET ${ApiConfig.prefix}/children': [student],
+        'POST ${ApiConfig.prefix}/requests': req(9, 'pending'),
       });
       await t.pumpWidget(
           app(RequestListScreen(user: user('HS'), service: f.service)));
@@ -377,7 +378,7 @@ void main() {
 
     testWidgets('list shows membership chips; search filters', (t) async {
       await t.pumpWidget(app(ClubListScreen(
-          user: user('HS'), service: Fake({'GET /api/clubs': list}).service)));
+          user: user('HS'), service: Fake({'GET ${ApiConfig.prefix}/clubs': list}).service)));
       await t.pumpAndSettle();
       expect(find.text('42 thành viên'), findsOneWidget);
       expect(find.text('Đã tham gia'), findsOneWidget);
@@ -394,7 +395,7 @@ void main() {
 
     testWidgets('non-students do not see the join chip', (t) async {
       await t.pumpWidget(app(ClubListScreen(
-          user: user('PH'), service: Fake({'GET /api/clubs': list}).service)));
+          user: user('PH'), service: Fake({'GET ${ApiConfig.prefix}/clubs': list}).service)));
       await t.pumpAndSettle();
       expect(find.text('Tham gia'), findsNothing);
     });
@@ -405,12 +406,12 @@ void main() {
         api: ApiClient(
           client: MockClient((r) async {
             final key = '${r.method} ${r.url.path}';
-            if (key == 'GET /api/clubs') return json(200, list);
-            if (key == 'POST /api/clubs/3/join') {
+            if (key == 'GET ${ApiConfig.prefix}/clubs') return json(200, list);
+            if (key == 'POST ${ApiConfig.prefix}/clubs/3/join') {
               joined = true;
               return json(201, {'status': 'pending'});
             }
-            if (key == 'GET /api/clubs/3') {
+            if (key == 'GET ${ApiConfig.prefix}/clubs/3') {
               return json(200, {...detail, 'myStatus': joined ? 'pending' : null});
             }
             return json(404, {'message': 'Not found'});
@@ -433,8 +434,8 @@ void main() {
 
     testWidgets('join conflict shows the server message', (t) async {
       final f = Fake({
-        'GET /api/clubs/3': detail,
-        'POST /api/clubs/3/join':
+        'GET ${ApiConfig.prefix}/clubs/3': detail,
+        'POST ${ApiConfig.prefix}/clubs/3/join':
             json(409, {'message': 'You already joined or requested this club'}),
       });
       await t.pumpWidget(app(ClubDetailScreen(user: user('HS'), clubId: 3, service: f.service)));
@@ -449,8 +450,8 @@ void main() {
   group('Home navigation', () {
     testWidgets('tiles open the right screens', (t) async {
       final f = Fake({
-        'GET /api/schedule': {'className': '10A1', 'items': []},
-        'GET /api/grades': {
+        'GET ${ApiConfig.prefix}/schedule': {'className': '10A1', 'items': []},
+        'GET ${ApiConfig.prefix}/grades': {
           'student': student,
           'term': 'HK1',
           'average': null,
@@ -458,8 +459,8 @@ void main() {
           'conduct': null,
           'subjects': [],
         },
-        'GET /api/requests': <Object>[],
-        'GET /api/clubs': <Object>[],
+        'GET ${ApiConfig.prefix}/requests': <Object>[],
+        'GET ${ApiConfig.prefix}/clubs': <Object>[],
       });
       for (final (key, title) in [
         ('tile_Schedule', 'Thời khóa biểu'),

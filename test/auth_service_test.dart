@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:myfschoolse1932/services/api_config.dart';
 import 'package:myfschoolse1932/services/auth_service.dart';
 
 import 'helpers.dart';
@@ -25,7 +26,7 @@ void main() {
     expect(u.role, 'GV');
     expect(Session.token, 'T');
     expect(Session.user?.id, 1);
-    expect(seen.url.path, '/api/login');
+    expect(seen.url.path, ApiConfig.path('/login'));
     expect(jsonDecode(seen.body),
         {'identifier': 'a@b.com', 'password': 'secret1'});
   });

@@ -1,13 +1,29 @@
 const { test, before, after, describe } = require('node:test');
 const assert = require('node:assert/strict');
+const path = require('node:path');
 const jwt = require('jsonwebtoken');
-const app = require('../server');
-const { closePool } = require('../db');
+
+// Default: start the in-process Express app. With API_BASE set (e.g. http://localhost:8088) the same tests run against
+// another server (the C# portal) and API_PREFIX (default /api, C# uses /api/m) replaces the /api prefix of every path.
+const API_BASE = process.env.API_BASE;
+const API_PREFIX = process.env.API_PREFIX || '/api';
+let app = null;
+let closePool = async () => {};
+if (API_BASE) {
+  require('dotenv').config({ path: path.join(__dirname, '..', '.env') }); // JWT_SECRET for forged tokens
+} else {
+  app = require('../server');
+  ({ closePool } = require('../db'));
+}
 
 let server;
 let base;
 
 before(async () => {
+  if (API_BASE) {
+    base = API_BASE.replace(/\/+$/, '');
+    return;
+  }
   await new Promise((resolve) => {
     server = app.listen(0, '127.0.0.1', resolve);
   });
@@ -15,12 +31,12 @@ before(async () => {
 });
 
 after(async () => {
-  await new Promise((r) => server.close(r));
+  if (server) await new Promise((r) => server.close(r));
   await closePool();
 });
 
 async function call(method, path, { body, raw, headers } = {}) {
-  const res = await fetch(base + path, {
+  const res = await fetch(base + path.replace(/^\/api/, API_PREFIX), {
     method,
     headers: { 'Content-Type': 'application/json', ...(headers || {}) },
     body: raw !== undefined ? raw : body !== undefined ? JSON.stringify(body) : undefined,
@@ -321,7 +337,7 @@ describe('misc', () => {
   });
 
   test('CORS header present', async () => {
-    const res = await fetch(base + '/api/health', { headers: { Origin: 'http://localhost:5555' } });
+    const res = await fetch(base + API_PREFIX + '/health', { headers: { Origin: 'http://localhost:5555' } });
     assert.ok(res.headers.get('access-control-allow-origin'));
   });
 });

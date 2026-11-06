@@ -1,14 +1,20 @@
-// Schedule, grades, requests, clubs: runs against the real database seeded by `npm run db:init`.
 const { test, before, after, describe } = require('node:test');
 const assert = require('node:assert/strict');
-const app = require('../server');
-const { closePool, run } = require('../db');
+// Default: in-process Express app. API_BASE / API_PREFIX: run the same tests against another server (see api.test.js).
+const API_BASE = process.env.API_BASE;
+const API_PREFIX = process.env.API_PREFIX || '/api';
+const app = API_BASE ? null : require('../server');
+const { closePool, run } = require('../db'); // direct DB access is only used to clean up the rows the tests create
 
 let server;
 let base;
 const tokens = {};
 
 before(async () => {
+  if (API_BASE) {
+    base = API_BASE.replace(/\/+$/, '');
+    return;
+  }
   await new Promise((resolve) => {
     server = app.listen(0, '127.0.0.1', resolve);
   });
@@ -16,12 +22,12 @@ before(async () => {
 });
 
 after(async () => {
-  await new Promise((r) => server.close(r));
+  if (server) await new Promise((r) => server.close(r));
   await closePool();
 });
 
 async function call(method, path, { body, headers } = {}) {
-  const res = await fetch(base + path, {
+  const res = await fetch(base + path.replace(/^\/api/, API_PREFIX), {
     method,
     headers: { 'Content-Type': 'application/json', ...(headers || {}) },
     body: body !== undefined ? JSON.stringify(body) : undefined,
