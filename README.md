@@ -8,6 +8,10 @@ app Flutter -> web service C# (admin-web, /api/m, JWT bearer) -> SQL Server
 
 Các trang Web Forms của portal dùng chung các service với web service này. Backend duy nhất là C#. Thư mục `backend/` (Node) chỉ là công cụ: `npm run db:init` tạo bảng + dữ liệu mẫu, `npm test` chạy 68 test hợp đồng vào `/api/m` của C#.
 
+## Demo (khuyên dùng)
+
+Nhấp đúp `demo.bat`: bật SQL Server + database, hỏi có đưa dữ liệu mẫu về ban đầu không, build và chạy web C# (`http://localhost:8088`), chạy app Flutter bản release ở cửa sổ riêng (`http://localhost:8090`) rồi mở cả hai trên trình duyệt. `demo.bat -Reset` / `demo.bat -NoReset` bỏ qua câu hỏi. Tắt: `demo-stop.bat`.
+
 ## Chạy nhanh
 
 Nhấp đúp `start.bat` (hoặc chạy nó trong terminal ở thư mục này). Script làm tất cả:

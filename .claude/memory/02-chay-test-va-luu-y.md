@@ -13,7 +13,7 @@ powershell -ExecutionPolicy Bypass -File admin-web\tools\run.ps1      # dừng: 
 # 3. App Flutter trên trình duyệt (cổng cố định để mở bằng công cụ trình duyệt)
 flutter run -d web-server --web-port=8090      # hoặc flutter run -d chrome ; Android Studio: máy ảo Pixel_10_Pro dùng 10.0.2.2:8088
 ```
-`start.bat` làm cả ba bước. Địa chỉ: app http://localhost:8090, web http://localhost:8088/Login.aspx (dùng `localhost`, không dùng 127.0.0.1), health `http://localhost:8088/api/m/health`.
+`start.bat` làm cả ba bước (app chạy Chrome, debug). Cho buổi demo dùng `demo.bat` (script `scripts/demo.ps1`): DB, hỏi reset dữ liệu mẫu (`scripts/reset-demo-data.sql` xoá sạch FSchoolDB rồi `db:init`), web, app Flutter `--release` cổng 8090 ở cửa sổ riêng, mở trình duyệt; tắt bằng `demo-stop.bat`. Lưu ý: `flutter run -d web-server` ở chế độ debug chỉ hiện trang trắng vì chờ debugger, nên phải `--release`. Địa chỉ: app http://localhost:8090, web http://localhost:8088/Login.aspx (dùng `localhost`, không dùng 127.0.0.1), health `http://localhost:8088/api/m/health`.
 Đăng nhập thử (mật khẩu `123456`): app theo SĐT 0901234567 PH, 0901000003 HS, 0901000001 GV, 0901000002 Manager. Web chỉ Manager/GV.
 Tệp cấu hình sinh tự động và KHÔNG commit: `backend/.env` (mật khẩu DB ngẫu nhiên, JWT_SECRET), `admin-web/connections.config`, `admin-web/secrets.config` (sinh bởi `admin-web/tools/gen-connection.ps1`, `run.ps1` tự gọi nếu thiếu).
 
