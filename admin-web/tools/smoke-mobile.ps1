@@ -1,4 +1,4 @@
-# Smoke test for the mobile JSON API (/api/m): the things the Node contract suite does not cover (abuse protection, token forging,
+﻿# Smoke test for the mobile JSON API (/api/m): the things the Node contract suite does not cover (abuse protection, token forging,
 # CORS, statelessness). The Node suite itself runs against this API with: cd backend; API_BASE=http://localhost:8088 API_PREFIX=/api/m npm test
 # Usage (inside the lock): powershell -File tools\locked.ps1 -Cmd "run.ps1; smoke-mobile.ps1; stop.ps1"
 # Creates ONE scratch HS user (+ one scratch request) with a unique name and removes them at the end; seeded accounts are never rate-limited.

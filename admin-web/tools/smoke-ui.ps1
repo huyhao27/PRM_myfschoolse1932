@@ -1,4 +1,4 @@
-# UI shell smoke test of the running site (start it first with tools\run.ps1, or use tools\locked.ps1).
+﻿# UI shell smoke test of the running site (start it first with tools\run.ps1, or use tools\locked.ps1).
 # Usage: powershell -ExecutionPolicy Bypass -File tools\smoke-ui.ps1 [-BaseUrl http://localhost:8088] [-Password 123456]
 param([string]$BaseUrl = 'http://localhost:8088', [string]$Password = '123456')
 $ErrorActionPreference = 'Continue'
