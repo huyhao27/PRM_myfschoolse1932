@@ -163,6 +163,12 @@ try {
   Result ($r.Status -in 200, 204 -and $r.Headers['Access-Control-Allow-Origin'] -eq 'http://localhost:5555') 'preflight from an allowed origin -> 204 + Allow-Origin = that origin'
   Result ($allowH -match 'Authorization' -and $allowH -match 'Content-Type') "preflight allows Authorization and Content-Type ($allowH)"
   Result ($r.Headers['Access-Control-Allow-Origin'] -ne '*') 'never "*"'
+  $r = Send 'OPTIONS' '/api/m/login' $null $null @{ Origin = 'http://localhost:60190'; 'Access-Control-Request-Method' = 'POST'; 'Access-Control-Request-Headers' = 'content-type' }
+  Result ($r.Status -in 200, 204 -and $r.Headers['Access-Control-Allow-Origin'] -eq 'http://localhost:60190') 'preflight from a random localhost port (flutter run -d chrome) is allowed'
+  foreach ($bad in 'http://localhost.evil.example', 'http://localhost:80x', 'https://localhost:8090', 'http://evil.example:8090') {
+    $r = Send 'OPTIONS' '/api/m/login' $null $null @{ Origin = $bad; 'Access-Control-Request-Method' = 'POST' }
+    Result (-not $r.Headers['Access-Control-Allow-Origin'] -and $r.Status -ge 400) "look-alike origin $bad refused (status $($r.Status))"
+  }
   $r = Send 'OPTIONS' '/api/m/login' $null $null @{ Origin = 'http://evil.example'; 'Access-Control-Request-Method' = 'POST' }
   Result (-not $r.Headers['Access-Control-Allow-Origin'] -and $r.Status -ge 400) "preflight from a disallowed origin -> no Allow-Origin (status $($r.Status))"
   $r = Send 'GET' '/api/m/health' $null $null @{ Origin = 'http://evil.example' }

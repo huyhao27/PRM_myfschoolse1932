@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace MyfschoolWeb.Controllers.Api.Mobile
@@ -11,7 +12,7 @@ namespace MyfschoolWeb.Controllers.Api.Mobile
     /// </summary>
     public static class MobileEdge
     {
-        public const string DefaultAllowedOrigins = "http://localhost:8090,http://localhost:8091,http://localhost:5555";
+        public const string DefaultAllowedOrigins = "http://localhost:*,http://127.0.0.1:*";
 
         public static bool IsMobilePath(string path)
         {
@@ -32,6 +33,25 @@ namespace MyfschoolWeb.Controllers.Api.Mobile
             return raw.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().TrimEnd('/')).Where(s => s.Length > 0 && s != "*").ToArray();
         }
 
+        /// <summary>
+        /// Exact entries ("http://localhost:8090") or a port wildcard ("http://localhost:*"): same scheme and host, any port of 1-5 digits.
+        /// The wildcard exists for `flutter run -d chrome` (Android Studio / VS Code), which serves the app on a random port.
+        /// </summary>
+        public static bool IsAllowedOrigin(string origin)
+        {
+            if (string.IsNullOrEmpty(origin)) return false;
+            foreach (string entry in AllowedOrigins())
+            {
+                if (string.Equals(entry, origin, StringComparison.Ordinal)) return true;
+                if (entry.EndsWith(":*", StringComparison.Ordinal))
+                {
+                    string prefix = entry.Substring(0, entry.Length - 1);   // "http://localhost:"
+                    if (origin.StartsWith(prefix, StringComparison.Ordinal) && Regex.IsMatch(origin.Substring(prefix.Length), @"^[0-9]{1,5}\z")) return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>Called from Application_BeginRequest. Returns true when the request was fully answered (preflight).</summary>
         public static bool Begin(HttpContext ctx)
         {
@@ -42,7 +62,7 @@ namespace MyfschoolWeb.Controllers.Api.Mobile
             res.Cache.SetNoStore();
 
             string origin = req.Headers["Origin"];
-            bool allowed = !string.IsNullOrEmpty(origin) && AllowedOrigins().Contains(origin, StringComparer.Ordinal);
+            bool allowed = IsAllowedOrigin(origin);
             bool preflight = req.HttpMethod == "OPTIONS";
             if (!string.IsNullOrEmpty(origin)) res.AppendHeader("Vary", "Origin");
 

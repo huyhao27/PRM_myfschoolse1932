@@ -43,7 +43,7 @@ Dữ liệu mẫu (mật khẩu `123456`): gv 0901000001, manager 0901000002, ph
 ## Xác thực và bảo mật
 - Mật khẩu bcrypt cost 10 (bcryptjs bên Node, BCrypt.Net-Next bên C#, đọc được hash của nhau).
 - Mobile: JWT HS256 viết tay (`admin-web/Services/MobileJwt.cs`), claim sub/role/iat/exp (1 giờ), khoá = JWT_SECRET trong `backend/.env`, ghi vào `admin-web/secrets.config` (git bỏ qua) bởi `tools/gen-connection.ps1`. Vai trò được đọc lại từ DB mỗi yêu cầu. Chỉ chấp nhận alg HS256, thiếu exp bị từ chối.
-- Chống tấn công mobile: giới hạn 5 lần đăng nhập sai / 5 lần reset mỗi định danh+IP mỗi 15 phút (429, trong bộ nhớ), CORS theo danh sách `AllowedOrigins`, không cookie session cho `/api/m`, header nosniff + no-store, truy vấn tham số hoá, giới hạn body 100 KB, không lộ passwordHash.
+- Chống tấn công mobile: giới hạn 5 lần đăng nhập sai / 5 lần reset mỗi định danh+IP mỗi 15 phút (429, trong bộ nhớ), CORS theo danh sách `AllowedOrigins` (mặc định `http://localhost:*,http://127.0.0.1:*`: mọi cổng localhost, vì Android Studio `flutter run -d chrome` dùng cổng ngẫu nhiên; tên miền khác bị chặn), không cookie session cho `/api/m`, header nosniff + no-store, truy vấn tham số hoá, giới hạn body 100 KB, không lộ passwordHash.
 - Web: session ASP.NET InProc 120 phút, mọi trang chốt quyền (Site.Master + từng trang), `ApiSessionModule` bật session cho `/api/*` trừ `/api/m`.
 - Đặt lại mật khẩu: mức demo (không xác minh chủ tài khoản). Cần OTP nếu đưa thật. Dev chạy http; triển khai cần HTTPS.
 
