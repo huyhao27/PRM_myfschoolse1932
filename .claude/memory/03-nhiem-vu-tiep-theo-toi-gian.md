@@ -1,5 +1,15 @@
 # 03. Nhiệm vụ tiếp theo: tối giản code, mềm và dễ hiểu hơn, giữ đủ luồng
 
+## Tiến độ (nhánh `refactor/simplify`, chưa push, chưa merge main)
+| Commit | Khu vực | Kiểm chứng |
+|---|---|---|
+| f8c2cec | App: xoá signup_screen, app_colors, main-init.txt, validateEmailOrPhone | analyze sạch, 76/76 |
+| f5267e1 | Web: xoá MongoDbContext, gói + DLL Mongo, thành viên [Obsolete]; BOM cho smoke-ui/mobile | build 0 cảnh báo, 6 smoke OK |
+| 68fe6c1 | backend/ phương án (b): xoá API Express, test mặc định vào C#, init.js tự chứa SQL | 68/68 vào C#, db:init chạy lại OK |
+| d94a72e | C#: Roles.StudentScope một chỗ; Import dùng GradeService.WeightOf | 6 smoke OK, 68/68 |
+Số dòng sau: lib 4140→3831, web C#+aspx 7385→7307, backend JS 1444→655. Dữ liệu mẫu nguyên trạng.
+Chưa làm: MobileService gọi lại RequestService/ClubService (cân nhắc: JSON phải giữ y hệt, lợi ít), PageBase cho trang web, rút ImportService/ListStudent. Chưa quyết: Bảng điều khiển dùng AVG thường (đổi = đổi số hiển thị, cần chủ dự án đồng ý).
+
 ## Yêu cầu của chủ dự án (nguyên ý)
 "Tối giản logic, làm mềm code hơn, đơn giản hơn, dễ hiểu hơn, lược bớt, nhưng vẫn đủ luồng."
 Hiểu là: bớt mã, bớt trừu tượng thừa, bớt lặp, đặt tên và cấu trúc dễ đọc, nhưng **không mất chức năng nào** của các luồng hiện có (xem `01-logic-va-kien-truc.md`). Đây là dự án học tập: ưu tiên dễ giải thích với giảng viên hơn là "đủ tính năng cho môi trường thật".

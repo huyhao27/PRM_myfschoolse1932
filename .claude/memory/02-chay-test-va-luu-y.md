@@ -21,9 +21,8 @@ Tệp cấu hình sinh tự động và KHÔNG commit: `backend/.env` (mật kh�
 | Lệnh | Kết quả mong đợi |
 |---|---|
 | `flutter analyze` | không có lỗi |
-| `flutter test` | 83 test đạt |
-| `cd backend && npm test` | 68 đạt (chạy Express Node nội bộ trên DB thật) |
-| Bộ test Node nhắm vào C#: `cd backend; $env:API_BASE='http://localhost:8088'; $env:API_PREFIX='/api/m'; npm test` (web phải đang chạy; Git Bash thêm `MSYS_NO_PATHCONV=1`) | 68 đạt |
+| `flutter test` | 76 test đạt |
+| `cd backend && npm test` (web C# phải đang chạy; mặc định API_BASE=http://localhost:8088, API_PREFIX=/api/m; Git Bash thêm `MSYS_NO_PATHCONV=1`) | 68 đạt |
 | smoke web (PowerShell, trong `admin-web`): `tools\smoke.ps1`, `smoke-ui.ps1`, `smoke-grades.ps1`, `smoke-requests.ps1`, `smoke-students.ps1`, `smoke-mobile.ps1` | tất cả "OK" |
 Chạy smoke có khoá: `tools\locked.ps1 -Cmd "run.ps1; smoke.ps1; stop.ps1"` (thêm `-KeepRunning` để giữ site chạy). `locked.ps1` dùng mutex vì build ghi đè `bin\MyfschoolWeb.dll` mà site đang mở; nhiều agent/người không được build/chạy cùng lúc.
 Giới hạn tốc độ đăng nhập/reset là trong bộ nhớ: chạy bộ test Node vào C# hơn hai lần trong 15 phút có thể bị 429 đến khi khởi động lại site.
@@ -37,6 +36,8 @@ sqlcmd ... -Q "UPDATE dbo.Requests SET status='pending',teacherComment=NULL,hand
 `npm run db:init` (hoặc `setup-backend.ps1`) tạo lại phần thiếu nhưng KHÔNG đặt lại mật khẩu đã đổi.
 
 ## Bẫy đã gặp
+- `locked.ps1 ... -KeepRunning` mà pipe output (`| Select-String`) sẽ treo vì server nền giữ ống: ghi ra file (`Start-Process -RedirectStandardOutput`).
+- Script .ps1 có tiếng Việt phải lưu UTF-8 **có BOM**, nếu không PowerShell 5.1 báo lỗi cú pháp (đã sửa smoke-ui, smoke-mobile).
 - SQL Server tự tắt giữa chừng nhiều lần: chạy lại `setup-backend.ps1` là bật lại.
 - Biên dịch web: dùng Roslyn trong VS Build Tools (csc của .NET Framework chỉ C# 5). Code nhúng trong `.aspx` là C# 5 nên mọi logic để ở code-behind. Thêm file .cs mới phải thêm vào `admin-web/myfschoolse1932web.csproj`.
 - Công cụ trình duyệt: ảnh chụp chậm nửa giây sau mỗi thao tác (chụp lại sau khi chờ); chạm vào Flutter web theo toạ độ; app Flutter web phải gọi API qua CORS (đã cho phép `localhost:8090` trong `AllowedOrigins`).
