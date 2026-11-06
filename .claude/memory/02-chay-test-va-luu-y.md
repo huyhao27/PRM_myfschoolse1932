@@ -28,6 +28,8 @@ Chạy smoke có khoá: `tools\locked.ps1 -Cmd "run.ps1; smoke.ps1; stop.ps1"` (
 Giới hạn tốc độ đăng nhập/reset là trong bộ nhớ: chạy bộ test Node vào C# hơn hai lần trong 15 phút có thể bị 429 đến khi khởi động lại site.
 
 ## Bất biến dữ liệu mẫu (test tự động dựa vào)
+Từ 06/11/2026 `demo.bat` nạp thêm `backend/sql/demo-extra.sql` (sinh tự động, chạy một lần, cần `sqlcmd -I -f 65001`): +6 GV (0902000001-06), +34 HS (hs101-134, 0903000001-34, lớp 10A1/10A2/11A1), +31 PH (0904000001-31; 0904000001 có 2 con), TKB 10A2 + 11A1 (58 tiết), điểm HK1, 18 đơn (6 chờ), 33 thành viên CLB (không có ai approved ở Lập trình). Tổng sau khi nạp: 77 user, 87 tiết, 1728 điểm, 22 đơn (8 chờ), 35 ClubMembers (16 approved). Test và smoke vẫn xanh với dữ liệu này: chúng chỉ dựa vào 6 tài khoản gốc, 29 tiết 10A1, 5 CLB, Lập trình = 56; smoke-requests/students đã đổi sang so với số đếm lúc bắt đầu, và smoke-requests chỉ bấm dòng "Hoc sinh Mai" trong trang CLB.
+Dữ liệu gốc dưới đây:
 6 user, 29 tiết, 96 điểm, 4 đơn (2 chờ duyệt, NULL ý kiến), 5 CLB (Lập trình 56 thành viên), 2 dòng ClubMembers (hs: Bóng đá approved, Âm nhạc pending). Test/ smoke tự dọn dữ liệu của chúng; nếu thử tay thì dọn bằng (thêm `-I` khi xoá bảng Users):
 ```
 sqlcmd -S localhost,1433 -E -C -d FSchoolDB -I -Q "DELETE FROM dbo.Requests WHERE reason LIKE 'TEST-%'"

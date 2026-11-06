@@ -50,6 +50,11 @@ function Post-Page($path, $jar, $page, $extra, $target) {
 }
 # All unique ids used in __doPostBack('...') calls of the page, in document order.
 function Targets($body) { return @([regex]::Matches($body, "__doPostBack\((?:&#39;|')([^&',]+)(?:&#39;|')") | ForEach-Object { $_.Groups[1].Value }) }
+function RowTargets($body, $name) {
+  $m = [regex]::Match($body, ">\s*$([regex]::Escape($name))\s*</td>(.*?)</tr>", 'Singleline')
+  if (-not $m.Success) { return @() }
+  return @(Targets $m.Groups[1].Value)
+}
 function Input-Name($body, $suffix) { if ($body -match "name=`"([^`"]*$suffix)`"") { return $Matches[1] } else { return $null } }
 function Input-Value($body, $suffix) {
   $n = Input-Name $body $suffix; if (-not $n) { return '' }
@@ -66,6 +71,12 @@ $gvId = SqlInt "SELECT id FROM dbo.Users WHERE email='gv@fschool.vn'"
 $gv2Id = SqlInt "SELECT id FROM dbo.Users WHERE email='gv2@fschool.vn'"
 $mgrId = SqlInt "SELECT id FROM dbo.Users WHERE email='manager@fschool.vn'"
 Result ($gvId -gt 0 -and $gv2Id -gt 0 -and $mgrId -gt 0) "accounts found (gv=$gvId gv2=$gv2Id manager=$mgrId)"
+
+# counts before the test: restore is checked against them (works with the base seed and with demo-extra.sql)
+$baseReq = SqlInt "SELECT COUNT(*) FROM dbo.Requests"
+$basePend = SqlInt "SELECT COUNT(*) FROM dbo.Requests WHERE status='pending' AND teacherComment IS NULL AND handledBy IS NULL AND handledAt IS NULL"
+$baseMembers = SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers"
+$baseApproved = SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers WHERE status='approved'"
 
 $touchedRequests = @(); $scratchClub = 0
 $clubSnapshot = $null
@@ -190,7 +201,7 @@ try {
   $cntBefore = SqlInt "SELECT baseMembers + (SELECT COUNT(*) FROM dbo.ClubMembers m WHERE m.clubId=c.id AND m.status='approved') FROM dbo.Clubs c WHERE c.id=$clubA"
   $va = Get-Page "ViewClub.aspx?id=$clubA" $mgr
   Result ($va.Status -eq 200 -and (Text $va.Body) -match 'Chờ duyệt' -and (Targets $va.Body).Count -ge 2) 'club page lists the pending member with Duyệt/Từ chối'
-  $rt = (Targets $va.Body) | Where-Object { $_ -like '*rptMembers*' }
+  $rt = RowTargets $va.Body 'Hoc sinh Mai'
   $ar = Post-Page "ViewClub.aspx?id=$clubA" $mgr $va.Body @{} $rt[0]
   Result ($ar.Status -eq 302 -and "$($ar.Location)" -match 'msg=approved') 'manager approves membership'
   Result ((SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers WHERE clubId=$clubA AND userId=$hs2 AND status='approved'") -eq 1) 'DB: membership approved'
@@ -202,7 +213,7 @@ try {
   Result ((SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers WHERE clubId=$clubA AND userId=$hs2 AND status='approved'") -eq 1) 'reject of an already approved row does not delete it'
 
   $vb = Get-Page "ViewClub.aspx?id=$clubB" $gv
-  $rtb = (Targets $vb.Body) | Where-Object { $_ -like '*rptMembers*' }
+  $rtb = RowTargets $vb.Body 'Hoc sinh Mai'
   Result ($vb.Status -eq 200 -and $rtb.Count -ge 2 -and $vb.Body -notmatch 'txtName') 'GV sees pending member buttons but no edit form'
   $rjb = Post-Page "ViewClub.aspx?id=$clubB" $gv $vb.Body @{} $rtb[1]
   Result ($rjb.Status -eq 302 -and "$($rjb.Location)" -match 'msg=rejected') 'GV rejects membership'
@@ -271,10 +282,11 @@ try {
 }
 
 # ---------------------------------------------------------------- verify restore
-Result ((SqlInt "SELECT COUNT(*) FROM dbo.Requests") -eq 4) 'restore: 4 requests'
-Result ((SqlInt "SELECT COUNT(*) FROM dbo.Requests WHERE status='pending' AND teacherComment IS NULL AND handledBy IS NULL AND handledAt IS NULL") -eq 2) 'restore: 2 pending requests with NULL comment/handler/handledAt'
+Result ((SqlInt "SELECT COUNT(*) FROM dbo.Requests") -eq $baseReq) "restore: $baseReq requests"
+Result ((SqlInt "SELECT COUNT(*) FROM dbo.Requests WHERE status='pending' AND teacherComment IS NULL AND handledBy IS NULL AND handledAt IS NULL") -eq $basePend) "restore: $basePend pending requests with NULL comment/handler/handledAt"
 Result ((SqlInt "SELECT COUNT(*) FROM dbo.Clubs") -eq 5) 'restore: 5 clubs'
-Result ((SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers") -eq 2) 'restore: 2 memberships (hs approved/pending)'
+Result ((SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers") -eq $baseMembers) "restore: $baseMembers memberships"
+Result ((SqlInt "SELECT COUNT(*) FROM dbo.ClubMembers WHERE status='approved'") -eq $baseApproved) "restore: $baseApproved approved memberships"
 Result ((SqlInt "SELECT baseMembers + (SELECT COUNT(*) FROM dbo.ClubMembers m WHERE m.clubId=c.id AND m.status='approved') FROM dbo.Clubs c WHERE name LIKE N'CLB L_p tr_nh'") -eq 56) 'restore: Lập trình memberCount 56'
 
 if ($script:fail -eq 0) { Write-Host "SMOKE-REQUESTS OK" -ForegroundColor Green; exit 0 } else { Write-Host "SMOKE-REQUESTS: $($script:fail) check(s) failed" -ForegroundColor Red; exit 1 }

@@ -12,6 +12,8 @@ Các trang Web Forms của portal dùng chung các service với web service nà
 
 Nhấp đúp `demo.bat`: bật SQL Server + database, hỏi có đưa dữ liệu mẫu về ban đầu không, build và chạy web C# (`http://localhost:8088`), chạy app Flutter bản release ở cửa sổ riêng (`http://localhost:8090`) rồi mở cả hai trên trình duyệt. `demo.bat -Reset` / `demo.bat -NoReset` bỏ qua câu hỏi. Tắt: `demo-stop.bat`.
 
+Ngoài 6 tài khoản gốc, `demo.bat` nạp thêm `backend/sql/demo-extra.sql` (một lần): 3 lớp 10A1/10A2/11A1 với 34 học sinh, 6 giáo viên (vd. GV `0902000001`), 31 phụ huynh (vd. PH có hai con `0904000001`), thời khóa biểu 10A2 và 11A1, điểm HK1, 18 đơn, thành viên CLB. Mật khẩu vẫn là `123456`. `demo.bat -BaseOnly` để chỉ dùng dữ liệu gốc.
+
 ## Chạy nhanh
 
 Nhấp đúp `start.bat` (hoặc chạy nó trong terminal ở thư mục này). Script làm tất cả:

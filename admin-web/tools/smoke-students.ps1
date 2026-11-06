@@ -105,7 +105,7 @@ $gv = (Do-Login 'gv@fschool.vn' $Password).Session
 $gv2 = (Do-Login 'gv2@fschool.vn' $Password).Session
 $anon = New-Object System.Net.CookieContainer
 
-$seedUsers = [int](Sql 'SELECT COUNT(*) FROM dbo.Users'); $seedSched = [int](Sql 'SELECT COUNT(*) FROM dbo.Schedule'); $seedLinks = [int](Sql 'SELECT COUNT(*) FROM dbo.ParentStudent')
+$seedUsers = [int](Sql 'SELECT COUNT(*) FROM dbo.Users'); $seedSched = [int](Sql 'SELECT COUNT(*) FROM dbo.Schedule'); $seedLinks = [int](Sql 'SELECT COUNT(*) FROM dbo.ParentStudent'); $seedGrades = [int](Sql 'SELECT COUNT(*) FROM dbo.Grade')
 Write-Host "Seed counts before: users=$seedUsers schedule=$seedSched parentLinks=$seedLinks"
 
 try {
@@ -360,7 +360,7 @@ finally {
        DELETE FROM dbo.Users WHERE phone LIKE '09770%' OR email LIKE '%@smoke.test';" | Out-Null
   $c = Sql "SELECT CONCAT((SELECT COUNT(*) FROM dbo.Users),'|',(SELECT COUNT(*) FROM dbo.Schedule WHERE className='10A1'),'|',(SELECT COUNT(*) FROM dbo.Schedule),'|',(SELECT COUNT(*) FROM dbo.ParentStudent WHERE parentId=(SELECT id FROM dbo.Users WHERE email='ph@fschool.vn')),'|',(SELECT COUNT(*) FROM dbo.ParentStudent),'|',(SELECT COUNT(*) FROM dbo.Grade))"
   Write-Host "Counts after cleanup (users|10A1 lessons|all lessons|children of ph|links|grades): $c"
-  Result ($c -eq "$seedUsers|29|$seedSched|2|$seedLinks|96") "database back to seed values"
+  Result ($c -eq "$seedUsers|29|$seedSched|2|$seedLinks|$seedGrades") "database back to seed values"
 }
 
 if ($script:fail -eq 0) { Write-Host "SMOKE-STUDENTS OK" -ForegroundColor Green; exit 0 } else { Write-Host "SMOKE-STUDENTS: $($script:fail) check(s) failed" -ForegroundColor Red; exit 1 }

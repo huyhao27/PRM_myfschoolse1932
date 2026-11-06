@@ -8,6 +8,7 @@ This folder is only tooling around it; nothing here runs in production.
 | `sql/schema.sql`, `sql/seed.sql` | Tables and demo data of `FSchoolDB` |
 | `sql/init.js` (`npm run db:init`) | Applies the schema, demo users (password `123456`) and demo data. Idempotent. |
 | `test/*.test.js` (`npm test`) | 68 contract tests of `/api/m`: status codes, JSON shape, role visibility, rate limits |
+| `sql/demo-extra.sql` | Extra demo data (run by `demo.bat`, once): 6 teachers, 34 students in 10A1/10A2/11A1, 31 parents, timetables, HK1 grades, 18 requests, club members. Leaves what the tests rely on unchanged. |
 | `db.js` | SQL Server pool, used by `init.js` and by the tests to clean up rows they create |
 
 ## Setup
